@@ -1,0 +1,1457 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucky Draw - Scratch & Win</title>
+
+<style>
+:root {
+  --primary: #155fc0;
+  --dark: #122b49;
+  --gold: #e9bb51;
+  --bg: #f3f6fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: #1b2b40;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.hero {
+  background: linear-gradient(135deg, #102640, #286a9e);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 8vw, 58px);
+  margin: 0 0 12px;
+}
+
+.hero p {
+  color: #dbe8f7;
+  line-height: 1.6;
+}
+
+.container {
+  width: min(100% - 28px, 850px);
+  margin: auto;
+  padding: 25px 0 60px;
+}
+
+.poster {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 5px 22px #142a4712;
+}
+
+.poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.poster-placeholder {
+  background: #eaf0f7;
+  border: 2px dashed #b7c5d6;
+  border-radius: 12px;
+  padding: 65px 15px;
+  color: #69798c;
+}
+
+.register-box {
+  background: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 22px;
+  box-shadow: 0 10px 35px #152c491c;
+}
+
+.register-box h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #67778b;
+  line-height: 1.7;
+}
+
+.field {
+  margin: 20px 0;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #d1dbe8;
+  padding: 14px;
+  border-radius: 11px;
+  font-size: 16px;
+  color: #17283d;
+  background: white;
+}
+
+input:focus {
+  outline: none;
+  border-color: #186acb;
+  box-shadow: 0 0 0 3px #186acb18;
+}
+
+button {
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 11px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #104d9d;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.note {
+  font-size: 12px;
+  color: #69788b;
+  line-height: 1.6;
+}
+
+/* SEARCHABLE DEALER DROPDOWN */
+
+.dealer-combobox {
+  position: relative;
+}
+
+.dealer-input-row {
+  display: flex;
+  position: relative;
+}
+
+.dealer-input-row input {
+  padding-right: 55px;
+}
+
+.dealer-toggle {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: calc(100% - 10px);
+  width: 42px;
+  padding: 0;
+  background: #eaf1fa;
+  color: #174c89;
+  font-size: 18px;
+}
+
+.dealer-toggle:hover {
+  background: #dceafa;
+}
+
+.dealer-list {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 230px;
+  overflow-y: auto;
+  z-index: 20;
+  background: white;
+  border: 1px solid #cbd7e5;
+  border-radius: 11px;
+  box-shadow: 0 12px 30px #12294426;
+  padding: 5px;
+}
+
+.dealer-option {
+  width: 100%;
+  background: white;
+  color: #21364f;
+  border-radius: 7px;
+  text-align: left;
+  padding: 12px;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.dealer-option:hover,
+.dealer-option:focus {
+  background: #eaf2fe;
+  color: #1355a6;
+}
+
+.dealer-empty {
+  padding: 13px;
+  color: #68798b;
+  font-size: 13px;
+}
+
+.checkbox-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 20px 0;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin: 1px 0 0;
+}
+
+.checkbox-row label {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.show-code {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 9px 0;
+}
+
+.show-code input {
+  width: 18px;
+  height: 18px;
+}
+
+.show-code label {
+  font-size: 13px;
+  margin: 0;
+  font-weight: normal;
+}
+
+.message {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 18px;
+}
+
+.message.error {
+  color: #b32635;
+}
+
+.message.success {
+  color: #14734b;
+}
+
+/* SCRATCH CARD */
+
+.scratch-view {
+  text-align: center;
+}
+
+.scratch-view h2 {
+  color: #152d49;
+}
+
+.scratch-card {
+  position: relative;
+  max-width: 400px;
+  margin: 25px auto 15px;
+  border-radius: 20px;
+  border: 5px solid var(--gold);
+  background: #fff4d4;
+  overflow: hidden;
+  box-shadow: 0 10px 30px #00000018;
+}
+
+.prize-content {
+  height: 200px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.prize-content h3 {
+  margin: 0;
+  color: #735a23;
+  font-size: 19px;
+}
+
+.prize-amount {
+  font-size: 42px;
+  font-weight: 900;
+  color: #117c4b;
+  margin: 12px 0;
+}
+
+#voucherOnCard {
+  color: #6e5d3d;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 200px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.voucher-result {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid #d5e3ef;
+  background: #f1f7fd;
+  text-align: left;
+  line-height: 2;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.voucher-result strong {
+  color: #11774b;
+}
+
+footer {
+  background: var(--dark);
+  color: #dae6f3;
+  text-align: center;
+  padding: 30px 15px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media(max-width: 500px) {
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .register-box {
+    padding: 22px 17px;
+  }
+
+  .prize-amount {
+    font-size: 35px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <h1>SCRATCH & WIN</h1>
+  <p>
+    Explore our exclusive offers.<br>
+    Register to unlock your surprise voucher!
+  </p>
+</header>
+
+<main class="container">
+
+  <!-- POSTER 1 -->
+  <section class="poster">
+    <h2>Special Offer 01</h2>
+    <div class="poster-placeholder">
+      Your First Poster
+    </div>
+    <!--
+    Replace placeholder with:
+    <img src="poster1.jpg" alt="Offer 1">
+    -->
+  </section>
+
+  <!-- POSTER 2 -->
+  <section class="poster">
+    <h2>Special Offer 02</h2>
+    <div class="poster-placeholder">
+      Your Second Poster
+    </div>
+  </section>
+
+  <!-- POSTER 3 -->
+  <section class="poster">
+    <h2>Special Offer 03</h2>
+    <div class="poster-placeholder">
+      Your Third Poster
+    </div>
+  </section>
+
+  <!-- CUSTOMER REGISTRATION -->
+
+  <section class="register-box" id="registration">
+
+    <div id="formView">
+
+      <h2>Lucky Draw Registration</h2>
+
+      <p class="subtitle">
+        Fill your details, select your dealer
+        and unlock the scratch card.
+      </p>
+
+      <form id="customerForm">
+
+        <div class="field">
+          <label for="customerName">
+            Customer Name
+          </label>
+
+          <input
+            id="customerName"
+            type="text"
+            required
+            minlength="2"
+            maxlength="80"
+            placeholder="Enter full name">
+        </div>
+
+        <div class="field">
+          <label for="mobile">
+            Customer Mobile Number
+          </label>
+
+          <input
+            id="mobile"
+            type="tel"
+            inputmode="numeric"
+            required
+            maxlength="10"
+            pattern="[6-9][0-9]{9}"
+            placeholder="10-digit mobile number">
+        </div>
+
+        <div class="field">
+          <label for="city">
+            City
+          </label>
+
+          <input
+            id="city"
+            type="text"
+            required
+            minlength="2"
+            maxlength="70"
+            placeholder="Enter your city">
+        </div>
+
+        <!-- SEARCHABLE DEALER SELECTION -->
+
+        <div class="field">
+          <label for="dealerInput">
+            Select Dealer
+          </label>
+
+          <div class="dealer-combobox"
+               id="dealerCombobox">
+
+            <div class="dealer-input-row">
+              <input
+                id="dealerInput"
+                type="text"
+                required
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls="dealerList"
+                placeholder="Search dealer name">
+
+              <button
+                type="button"
+                class="dealer-toggle"
+                id="dealerToggle"
+                aria-label="Show dealer list">
+                ▾
+              </button>
+            </div>
+
+            <div id="dealerList"
+                 class="dealer-list"
+                 role="listbox"
+                 hidden>
+            </div>
+
+          </div>
+
+          <p class="note">
+            Dealer list Google Sheet se load hoti hai.
+            Name type karke search bhi kar sakte hain.
+          </p>
+        </div>
+
+        <!-- DEALER VERIFICATION -->
+
+        <div class="field" id="proofField" hidden>
+          <label for="dealerProof">
+            Dealer Mobile / Secret Code
+          </label>
+
+          <input
+            id="dealerProof"
+            type="password"
+            maxlength="100"
+            autocomplete="off"
+            placeholder="Dealer verification detail">
+
+          <div class="show-code">
+            <input id="showProof"
+                   type="checkbox">
+
+            <label for="showProof">
+              Show entered code
+            </label>
+          </div>
+
+          <p class="note">
+            Please enter the verification detail
+            provided by your dealer.
+          </p>
+        </div>
+
+        <div class="checkbox-row">
+          <input
+            type="checkbox"
+            id="consent"
+            required>
+
+          <label for="consent">
+            I agree to participate in this promotion
+            and consent to the use of my submitted
+            details for campaign administration
+            and voucher verification.
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          id="submitButton">
+          Submit & Unlock Scratch Card
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- SCRATCH CARD SECTION -->
+
+    <section
+      id="scratchView"
+      class="scratch-view"
+      hidden>
+
+      <h2>Scratch & Win</h2>
+
+      <p class="subtitle">
+        Use your finger or mouse to reveal your reward.
+      </p>
+
+      <div class="scratch-card">
+
+        <div class="prize-content">
+          <h3 id="prizeHeading">
+            Congratulations!
+          </h3>
+
+          <div
+            class="prize-amount"
+            id="prizeAmount">
+            ₹0
+          </div>
+
+          <span id="voucherOnCard"></span>
+        </div>
+
+        <canvas
+          id="scratchCanvas"
+          width="600"
+          height="300">
+        </canvas>
+
+      </div>
+
+      <div
+        class="voucher-result"
+        id="voucherResult"
+        hidden>
+
+        <div>
+          <b>Dealer:</b>
+          <span id="resultDealer"></span>
+        </div>
+
+        <div>
+          <b>Reward:</b>
+          <span id="resultAmount"></span>
+        </div>
+
+        <div>
+          <b>Voucher:</b>
+          <strong id="resultVoucher"></strong>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div
+      class="message"
+      id="message"
+      role="status"
+      aria-live="polite">
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  © Scratch & Win Promotional Campaign<br>
+  One entered mobile number gets one participation.<br>
+  Dealer verification required. Terms apply.
+</footer>
+
+<script>
+"use strict";
+
+/************************************************
+ YOUR GOOGLE APPS SCRIPT URL — ALREADY ADDED
+************************************************/
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzYwMsUsHImx0rOSaWLW6UbCh1Bi2YA4WBrzIuFOSMBBV3kvWzdybgGPSDFvmVakM5x/exec";
+
+const STORAGE_KEY = "lucky_draw_session_v3";
+
+const $ = id => document.getElementById(id);
+
+const sleep = ms =>
+  new Promise(resolve => setTimeout(resolve, ms));
+
+let dealers = [];
+let selectedDealer = "";
+let lastDealerLoad = 0;
+let submitting = false;
+let activeSession = null;
+let activeResult = null;
+let revealStarted = false;
+
+/************************************************
+ SHOW STATUS MESSAGES
+************************************************/
+
+function showMessage(text, isError = false) {
+  const el = $("message");
+
+  el.textContent = text;
+  el.className = "message " +
+    (isError ? "error" : "success");
+}
+
+/************************************************
+ JSONP — PUBLIC READ REQUESTS
+************************************************/
+
+function apiGet(action, params = {}) {
+  return new Promise((resolve, reject) => {
+    const callback = "cb_" +
+      crypto.randomUUID().replace(/-/g, "");
+
+    const script = document.createElement("script");
+
+    let timer;
+
+    const clean = () => {
+      clearTimeout(timer);
+      delete window[callback];
+      script.remove();
+    };
+
+    window[callback] = response => {
+      clean();
+      resolve(response);
+    };
+
+    script.onerror = () => {
+      clean();
+      reject(new Error("API connection failed"));
+    };
+
+    timer = setTimeout(() => {
+      clean();
+      reject(new Error("API request timed out"));
+    }, 15000);
+
+    const url = new URL(API_URL);
+
+    url.searchParams.set("action", action);
+    url.searchParams.set("callback", callback);
+    url.searchParams.set(
+      "nonce",
+      crypto.randomUUID()
+    );
+
+    for (const [key, value] of Object.entries(params)) {
+      url.searchParams.set(key, value);
+    }
+
+    script.src = url.toString();
+    document.head.appendChild(script);
+  });
+}
+
+/************************************************
+ POST — CREATE / REVEAL REWARD
+************************************************/
+
+function apiPost(data) {
+  const body = new URLSearchParams(data);
+
+  // Apps Script redirects cross-origin responses.
+  // The result is confirmed using JSONP status polling.
+  return fetch(API_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: body
+  });
+}
+
+/************************************************
+ SEARCHABLE DEALER DROPDOWN
+************************************************/
+
+function matchedDealers(query) {
+  const q = String(query || "")
+    .trim()
+    .toLowerCase();
+
+  return dealers.filter(name =>
+    name.toLowerCase().includes(q)
+  );
+}
+
+function exactDealer(name) {
+  return dealers.find(d =>
+    d.toLowerCase() ===
+    String(name || "").trim().toLowerCase()
+  ) || "";
+}
+
+function openDealerList() {
+  $("dealerList").hidden = false;
+  $("dealerInput").setAttribute(
+    "aria-expanded", "true"
+  );
+
+  renderDealerOptions();
+}
+
+function closeDealerList() {
+  $("dealerList").hidden = true;
+  $("dealerInput").setAttribute(
+    "aria-expanded", "false"
+  );
+}
+
+function selectDealer(name) {
+  selectedDealer = name;
+
+  $("dealerInput").value = name;
+
+  closeDealerList();
+  updateDealerProof();
+}
+
+function updateDealerProof() {
+  const actual =
+    exactDealer($("dealerInput").value);
+
+  selectedDealer = actual;
+
+  $("proofField").hidden = !actual;
+  $("dealerProof").required = Boolean(actual);
+
+  return Boolean(actual);
+}
+
+function renderDealerOptions() {
+  const list = $("dealerList");
+  list.replaceChildren();
+
+  const matches = matchedDealers(
+    $("dealerInput").value
+  );
+
+  if (!matches.length) {
+    const empty = document.createElement("div");
+    empty.className = "dealer-empty";
+    empty.textContent = dealers.length
+      ? "No matching dealer found"
+      : "No dealers available";
+
+    list.appendChild(empty);
+    return;
+  }
+
+  // Filter first, show up to 80 results.
+  matches.slice(0, 80).forEach(name => {
+    const btn = document.createElement("button");
+
+    btn.type = "button";
+    btn.className = "dealer-option";
+    btn.setAttribute("role", "option");
+    btn.textContent = name;
+
+    btn.addEventListener("click", () => {
+      selectDealer(name);
+    });
+
+    list.appendChild(btn);
+  });
+
+  if (matches.length > 80) {
+    const more = document.createElement("div");
+    more.className = "dealer-empty";
+    more.textContent =
+      "Keep typing to narrow the dealer list.";
+
+    list.appendChild(more);
+  }
+}
+
+async function loadDealers(force = false) {
+  if (!force &&
+      dealers.length &&
+      Date.now() - lastDealerLoad < 15000) {
+    return;
+  }
+
+  try {
+    const data = await apiGet("dealers");
+
+    if (!data.ok || !Array.isArray(data.dealers)) {
+      throw new Error("Invalid dealer list response");
+    }
+
+    dealers = data.dealers;
+    lastDealerLoad = Date.now();
+
+    updateDealerProof();
+
+    if (!$("dealerList").hidden) {
+      renderDealerOptions();
+    }
+
+  } catch (error) {
+    showMessage(
+      "Dealer list load nahi hui. " +
+      "Please check your Apps Script deployment.",
+      true
+    );
+  }
+}
+
+$("dealerInput").addEventListener(
+  "focus", async () => {
+    openDealerList();
+    await loadDealers(true);
+  }
+);
+
+$("dealerInput").addEventListener("input", () => {
+  updateDealerProof();
+  openDealerList();
+});
+
+$("dealerToggle").addEventListener(
+  "click", async () => {
+    if ($("dealerList").hidden) {
+      openDealerList();
+      await loadDealers(true);
+      $("dealerInput").focus();
+    } else {
+      closeDealerList();
+    }
+  }
+);
+
+$("dealerInput").addEventListener(
+  "keydown", event => {
+    if (event.key === "Escape") {
+      closeDealerList();
+    }
+
+    if (event.key === "ArrowDown") {
+      if ($("dealerList").hidden) {
+        openDealerList();
+      }
+
+      const first =
+        $("dealerList").querySelector(
+          ".dealer-option"
+        );
+
+      if (first) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  }
+);
+
+$("dealerCombobox").addEventListener(
+  "keydown", event => {
+    if (event.key === "Escape") {
+      closeDealerList();
+      $("dealerInput").focus();
+    }
+  }
+);
+
+document.addEventListener("pointerdown", event => {
+  if (!$("dealerCombobox").contains(event.target)) {
+    closeDealerList();
+  }
+});
+
+$("showProof").addEventListener(
+  "change", () => {
+    $("dealerProof").type =
+      $("showProof").checked
+        ? "text"
+        : "password";
+  }
+);
+
+/************************************************
+ SAVE ONE REQUEST SESSION
+************************************************/
+
+function saveSession(session) {
+  activeSession = session;
+
+  sessionStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(session)
+  );
+}
+
+function readSession() {
+  try {
+    return JSON.parse(
+      sessionStorage.getItem(STORAGE_KEY)
+    );
+  } catch (_) {
+    return null;
+  }
+}
+
+function clearSession() {
+  activeSession = null;
+  sessionStorage.removeItem(STORAGE_KEY);
+}
+
+/************************************************
+ POLL THE BACKEND FOR SAVED RESULT
+************************************************/
+
+async function pollStatus(session, requireScratched = false) {
+  for (let i = 0; i < 25; i++) {
+    await sleep(1500);
+
+    try {
+      const response = await apiGet("status", {
+        requestId: session.requestId,
+        receipt: session.receipt
+      });
+
+      if (response.ok) {
+        if (!requireScratched || response.scratched) {
+          return response;
+        }
+
+        continue;
+      }
+
+      if (response.code === "PENDING" ||
+          response.code === "SERVER_ERROR") {
+        continue;
+      }
+
+      return response;
+
+    } catch (error) {
+      // Keep retrying on temporary network errors.
+    }
+  }
+
+  return null;
+}
+
+/************************************************
+ CUSTOMER REGISTRATION
+************************************************/
+
+$("customerForm").addEventListener(
+  "submit", async event => {
+    event.preventDefault();
+
+    if (submitting) return;
+
+    if (!$("customerForm").reportValidity()) {
+      return;
+    }
+
+    const dealer = exactDealer(
+      $("dealerInput").value
+    );
+
+    if (!dealer) {
+      showMessage(
+        "Select a valid dealer from the list.",
+        true
+      );
+      return;
+    }
+
+    const mobile = $("mobile").value.trim();
+
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+      showMessage(
+        "Enter a valid 10-digit mobile number.",
+        true
+      );
+      return;
+    }
+
+    const proof = $("dealerProof").value.trim();
+
+    if (!proof) {
+      showMessage(
+        "Please enter dealer mobile or secret code.",
+        true
+      );
+      return;
+    }
+
+    const customerData = {
+      customerName: $("customerName").value.trim(),
+      mobile: mobile,
+      city: $("city").value.trim(),
+      dealerName: dealer
+    };
+
+    // Reuse request ID for same customer on retry.
+    const previous = readSession();
+    let session;
+
+    if (previous &&
+        previous.customerName === customerData.customerName &&
+        previous.mobile === customerData.mobile &&
+        previous.city === customerData.city &&
+        previous.dealerName === customerData.dealerName) {
+
+      session = previous;
+
+    } else {
+      session = {
+        requestId: crypto.randomUUID(),
+        receipt: crypto.randomUUID(),
+        ...customerData
+      };
+    }
+
+    saveSession(session);
+
+    submitting = true;
+    $("submitButton").disabled = true;
+
+    showMessage(
+      "Verifying dealer and checking latest budget..."
+    );
+
+    try {
+      // POST creates the reward entry in Response.
+      // Response is checked separately via status API.
+      apiPost({
+        action: "claim",
+        requestId: session.requestId,
+        receipt: session.receipt,
+        customerName: customerData.customerName,
+        mobile: customerData.mobile,
+        city: customerData.city,
+        dealerName: customerData.dealerName,
+        dealerProof: proof,
+        consent: $("consent").checked
+          ? "yes"
+          : "no"
+      }).catch(() => {});
+
+      const result = await pollStatus(session);
+
+      if (!result) {
+        throw new Error(
+          "Server confirmation is pending. " +
+          "Please retry using the same details."
+        );
+      }
+
+      if (!result.ok) {
+        // A rejected submission can start a new request.
+        clearSession();
+
+        throw new Error(
+          result.message || "Registration rejected"
+        );
+      }
+
+      activeResult = result;
+      displayScratch(result);
+
+      showMessage(
+        "Dealer verified. Your scratch card is ready!"
+      );
+
+    } catch (error) {
+      showMessage(error.message, true);
+
+    } finally {
+      submitting = false;
+      $("submitButton").disabled = false;
+    }
+  }
+);
+
+/************************************************
+ DISPLAY ASSIGNED SCRATCH CARD
+************************************************/
+
+function displayScratch(result) {
+  activeResult = result;
+  revealStarted = false;
+
+  $("formView").hidden = true;
+  $("scratchView").hidden = false;
+
+  const amount = Number(result.amount || 0);
+
+  $("prizeHeading").textContent =
+    amount > 0
+      ? "Congratulations!"
+      : "Better Luck Next Time";
+
+  $("prizeAmount").textContent =
+    amount > 0
+      ? "₹" + amount
+      : "No Reward";
+
+  $("resultDealer").textContent =
+    result.dealer || "";
+
+  $("resultAmount").textContent =
+    "₹" + amount;
+
+  $("resultVoucher").textContent =
+    result.voucher || "No Voucher";
+
+  $("voucherResult").hidden = true;
+
+  $("voucherOnCard").textContent = "";
+
+  if (result.scratched) {
+    completeReveal();
+
+    showMessage(
+      "Your previous scratch result has been restored."
+    );
+
+    return;
+  }
+
+  initializeScratch();
+}
+
+function completeReveal() {
+  $("scratchCanvas").style.display = "none";
+  $("voucherResult").hidden = false;
+
+  const amount = Number(activeResult?.amount || 0);
+
+  $("voucherOnCard").textContent =
+    amount > 0
+      ? "Voucher: " + activeResult.voucher
+      : "No rewards available for this entry.";
+}
+
+/************************************************
+ SAVE SCRATCH COMPLETION TO RESPONSE SHEET
+************************************************/
+
+async function saveScratchCompletion() {
+  if (revealStarted || !activeSession) return;
+
+  revealStarted = true;
+
+  completeReveal();
+
+  showMessage(
+    "Reward revealed. Saving scratch status..."
+  );
+
+  try {
+    apiPost({
+      action: "reveal",
+      requestId: activeSession.requestId,
+      receipt: activeSession.receipt
+    }).catch(() => {});
+
+    const result = await pollStatus(
+      activeSession,
+      true
+    );
+
+    if (!result || !result.ok || !result.scratched) {
+      throw new Error(
+        "Reward is assigned, but scratch status " +
+        "could not be confirmed. Reload to retry."
+      );
+    }
+
+    activeResult = result;
+
+    showMessage(
+      "Scratch completed! Details saved in Google Sheet."
+    );
+
+  } catch (error) {
+    revealStarted = false;
+    showMessage(error.message, true);
+  }
+}
+
+/************************************************
+ INTERACTIVE SCRATCH EFFECT
+************************************************/
+
+function initializeScratch() {
+  const canvas = $("scratchCanvas");
+
+  canvas.style.display = "block";
+
+  const ctx = canvas.getContext("2d", {
+    willReadFrequently: true
+  });
+
+  ctx.globalCompositeOperation = "source-over";
+
+  ctx.clearRect(
+    0, 0,
+    canvas.width,
+    canvas.height
+  );
+
+  // Silver scratch coating
+  ctx.fillStyle = "#adb8c6";
+
+  ctx.fillRect(
+    0, 0,
+    canvas.width,
+    canvas.height
+  );
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#32445c";
+  ctx.font = "bold 38px Arial";
+
+  ctx.fillText(
+    "SCRATCH HERE",
+    canvas.width / 2,
+    canvas.height / 2
+  );
+
+  let drawing = false;
+  let completed = false;
+
+  function getPosition(event) {
+    const rect =
+      canvas.getBoundingClientRect();
+
+    return {
+      x: (event.clientX - rect.left) *
+        canvas.width / rect.width,
+
+      y: (event.clientY - rect.top) *
+        canvas.height / rect.height
+    };
+  }
+
+  function start(event) {
+    if (completed) return;
+
+    event.preventDefault();
+    drawing = true;
+
+    canvas.setPointerCapture(event.pointerId);
+
+    const p = getPosition(event);
+
+    ctx.globalCompositeOperation =
+      "destination-out";
+
+    ctx.lineWidth = 65;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(p.x + 0.1, p.y);
+    ctx.stroke();
+  }
+
+  function move(event) {
+    if (!drawing || completed) return;
+
+    event.preventDefault();
+
+    const p = getPosition(event);
+
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  }
+
+  function end() {
+    if (!drawing || completed) return;
+
+    drawing = false;
+    ctx.closePath();
+
+    // Check percentage of scratch coating removed.
+    const pixels = ctx.getImageData(
+      0, 0,
+      canvas.width,
+      canvas.height
+    ).data;
+
+    let checked = 0;
+    let erased = 0;
+
+    for (let i = 3; i < pixels.length; i += 64) {
+      checked++;
+
+      if (pixels[i] < 80) {
+        erased++;
+      }
+    }
+
+    if (checked && erased / checked >= 0.35) {
+      completed = true;
+      saveScratchCompletion();
+    }
+  }
+
+  canvas.onpointerdown = start;
+  canvas.onpointermove = move;
+  canvas.onpointerup = end;
+  canvas.onpointercancel = end;
+}
+
+/************************************************
+ RESTORE SCRATCH AFTER PAGE REFRESH
+************************************************/
+
+async function restoreSession() {
+  const saved = readSession();
+
+  if (!saved || !saved.requestId || !saved.receipt) {
+    return;
+  }
+
+  activeSession = saved;
+
+  // Restore previous form values if still pending.
+  $("customerName").value = saved.customerName || "";
+  $("mobile").value = saved.mobile || "";
+  $("city").value = saved.city || "";
+  $("dealerInput").value = saved.dealerName || "";
+
+  updateDealerProof();
+
+  try {
+    const result = await apiGet("status", {
+      requestId: saved.requestId,
+      receipt: saved.receipt
+    });
+
+    if (result.ok) {
+      displayScratch(result);
+    } else if (result.code === "PENDING") {
+      showMessage(
+        "Previous request is pending. " +
+        "Enter your dealer verification detail " +
+        "and retry if necessary."
+      );
+    } else {
+      clearSession();
+    }
+
+  } catch (error) {
+    // Form remains available if network is unavailable.
+  }
+}
+
+/************************************************
+ START WEBSITE
+************************************************/
+
+async function startWebsite() {
+  await loadDealers(true);
+  await restoreSession();
+}
+
+startWebsite();
+
+</script>
+
+</body>
+</html>
