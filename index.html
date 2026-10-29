@@ -3,607 +3,805 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#210f3d">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#180c2b">
 <title>Diwali Dhamaka | Scratch & Win</title>
 
 <style>
 :root {
-  --bg:#100d28;
-  --purple:#32144f;
-  --gold:#ffcf70;
-  --gold2:#f9a938;
-  --text:#fff7ea;
-  --muted:#d3c1e8;
-  --border:#67457e;
+  --night:#100a20;
+  --purple:#2c1649;
+  --gold:#ffd275;
+  --pink:#eeb3df;
+  --white:#fff9ee;
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* {box-sizing:border-box;}
+html {scroll-behavior:smooth;}
 body {
   margin:0;
-  background:var(--bg);
   font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
+  background:#100b21;
+  color:var(--white);
   overflow-x:hidden;
 }
-[hidden] { display:none!important; }
-button,input { font:inherit; }
-button { cursor:pointer; }
-button:disabled { opacity:.65; cursor:wait; }
+[hidden] {display:none!important;}
+button,input {font:inherit;}
+button {cursor:pointer;}
+button:disabled {cursor:wait;opacity:.68;}
 
+/* Festive ambient background */
+body:before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 20%,#5a245343,transparent 38%),
+    radial-gradient(circle at 85% 70%,#a15d2928,transparent 42%),
+    linear-gradient(#100a20,#1a1032);
+}
+.ambient {
+  position:fixed;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.ambient span {
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ffdd9b;
+  box-shadow:0 0 12px #ffc96a;
+  animation:starFloat var(--time) linear infinite;
+  animation-delay:var(--delay);
+  opacity:0;
+}
+@keyframes starFloat {
+  0% {transform:translateY(30px) scale(.4);opacity:0;}
+  20%,75% {opacity:.85;}
+  100% {transform:translateY(-130px) scale(1.4);opacity:0;}
+}
+
+/* Hero */
 .hero {
   position:relative;
-  isolation:isolate;
   overflow:hidden;
-  min-height:380px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
   text-align:center;
-  padding:75px 20px 50px;
+  padding:65px 18px 52px;
+  min-height:390px;
   background:
-    radial-gradient(circle at 50% 70%,#76347a 0%,transparent 55%),
-    linear-gradient(140deg,#130e32,#351451,#170b36);
+    radial-gradient(ellipse at 50% 70%,#6c3275b8,transparent 64%),
+    linear-gradient(135deg,#1a0b36,#42205b,#160c31);
+  border-bottom:2px solid #d79b4d;
 }
-#fireworks {
+.hero:before {
+  content:"";
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  inset:12px;
+  border:1px solid #f8c76632;
+  border-radius:26px;
   pointer-events:none;
-  z-index:-1;
 }
-.hero-content { position:relative;z-index:2; }
+.hero-content {position:relative;z-index:2;}
 .eyebrow {
   color:var(--gold);
-  letter-spacing:4px;
   font-size:12px;
+  letter-spacing:4px;
   font-weight:800;
-  text-transform:uppercase;
 }
 .hero h1 {
-  margin:13px 0 4px;
-  color:#ffe8a6;
-  font-size:clamp(38px,8vw,72px);
-  line-height:1.06;
-  text-shadow:0 0 25px #f2a64280;
+  margin:14px 0 5px;
+  font-size:clamp(35px,8vw,74px);
+  line-height:1.1;
+  color:#ffe3a0;
+  text-shadow:0 0 30px #fdbd6477;
   animation:titleGlow 3s ease-in-out infinite alternate;
 }
 .hero h2 {
   margin:10px 0;
-  font-size:clamp(22px,5vw,34px);
-  color:white;
+  font-size:clamp(22px,5vw,35px);
+  color:#fff3df;
 }
 .hero p {
-  color:#e9d8f7;
-  font-size:15px;
-  line-height:1.7;
+  color:#e6d8ee;
+  font-size:14px;
+  line-height:1.8;
 }
 @keyframes titleGlow {
-  from {text-shadow:0 0 12px #df944566;}
-  to {text-shadow:0 0 34px #ffc761bb;}
+  from {text-shadow:0 0 12px #e9a24d55;}
+  to {text-shadow:0 0 38px #ffca73bb;}
 }
 
-/* Decorative animated diyas */
-.diya-row {
-  position:relative;
+/* Diwali hanging decoration */
+.toran {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:50px;
   display:flex;
-  gap:45px;
-  justify-content:center;
-  margin:26px 0 10px;
-}
-.diya {
-  display:block;
-  position:relative;
-  width:60px;
-  height:57px;
-  animation:float 3s ease-in-out infinite;
-  animation-delay:var(--delay,0s);
-}
-.diya .flame {
-  position:absolute;
-  top:1px;
-  left:23px;
-  width:16px;
-  height:28px;
-  transform:rotate(45deg);
-  border-radius:90% 0 90% 90%;
-  background:linear-gradient(45deg,#ff7400,#ffdf69,#fff7c6);
-  box-shadow:0 0 20px 6px #ffad3466;
-  animation:flicker 1.15s ease-in-out infinite alternate;
-}
-.diya .bowl {
-  position:absolute;
-  bottom:5px;
-  left:3px;
-  width:56px;
-  height:25px;
-  border-radius:5px 5px 35px 35px;
-  background:linear-gradient(180deg,#ffcc66,#b44b14);
-  border-bottom:3px solid #ffdc7a;
-}
-@keyframes float {
-  50% {transform:translateY(-9px);}
-}
-@keyframes flicker {
-  50% {transform:rotate(39deg) scale(.85,1.15);}
-}
-
-.twinkle {
-  position:absolute;
-  z-index:1;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#ffe7a3;
-  box-shadow:0 0 14px 4px #ffcb66;
-  animation:twinkle var(--speed) ease-in-out infinite;
-  animation-delay:var(--delay);
+  align-items:flex-start;
+  justify-content:space-around;
   pointer-events:none;
 }
-@keyframes twinkle {
-  0%,100% {opacity:0;transform:scale(.3);}
-  50% {opacity:1;transform:scale(1.3);}
-}
-
-main {
-  max-width:760px;
-  margin:auto;
-  padding:32px 16px 85px;
-}
-.info-strip {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:24px;
-}
-.info {
-  background:#28173e;
-  border:1px solid #5e3b77;
-  border-radius:14px;
-  text-align:center;
-  padding:16px 7px;
-  font-size:12px;
-  line-height:1.5;
-}
-.info span {
-  display:block;
-  font-size:25px;
-  margin-bottom:7px;
-}
-.card {
+.toran span {
   position:relative;
-  background:linear-gradient(160deg,#2f1b4f,#1b153b);
-  border:1px solid #8e5d91;
-  border-radius:24px;
-  box-shadow:0 18px 65px #0006,0 0 32px #ffba3020;
-  padding:34px;
-  overflow:visible;
+  width:2px;
+  height:25px;
+  background:#d9a855;
 }
-.card:before {
+.toran span:after {
   content:"";
   position:absolute;
-  inset:0;
-  border-radius:24px;
-  pointer-events:none;
-  border:1px solid #ffde7025;
+  top:18px;
+  left:-9px;
+  width:20px;
+  height:23px;
+  border-radius:55% 55% 60% 60%;
+  background:linear-gradient(135deg,#ffcd61,#c96327);
+  transform:rotate(35deg);
+  box-shadow:0 0 12px #ffa43f55;
+  animation:sway 3s ease-in-out infinite alternate;
+  transform-origin:top center;
 }
-.section-heading {
-  text-align:center;
-  font-size:27px;
-  color:var(--gold);
-  margin:4px 0 9px;
+.toran span:nth-child(even):after {
+  background:linear-gradient(135deg,#e89b54,#9c3465);
+  animation-delay:1s;
 }
-.subtitle {
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
-  margin:0 0 25px;
-}
-.gold-line {
-  width:75px;
-  height:3px;
-  border-radius:10px;
-  margin:0 auto 22px;
-  background:linear-gradient(90deg,transparent,#ffde75,transparent);
-}
-.field {
-  margin:19px 0;
-  transition:transform .25s;
-}
-.field:focus-within {transform:translateY(-2px);}
-.field label {
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:9px;
-  color:#f6e8ff;
-}
-.field input {
-  width:100%;
-  height:52px;
-  color:white;
-  background:#150e2c;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:0 15px;
-  outline:0;
-  transition:all .23s;
-}
-.field input::placeholder {color:#8f80ac;}
-.field input:focus {
-  border-color:#ffcb70;
-  box-shadow:0 0 0 3px #ffcb701b,
-             0 0 20px #ffb84422;
-}
-.field input:not(:placeholder-shown):valid {
-  border-color:#a07bc0;
-}
-.hint {
-  color:#bba9cc;
-  font-size:12px;
-  line-height:1.6;
-  margin:8px 0 0;
+@keyframes sway {
+  to {transform:rotate(-24deg);}
 }
 
-/* Searchable dealer selection */
+/* Live burning diyas */
+.diya-row {
+  display:flex;
+  justify-content:center;
+  gap:clamp(12px,4vw,35px);
+  margin:34px auto 6px;
+}
+.diya {
+  position:relative;
+  display:block;
+  width:68px;
+  height:75px;
+  flex:none;
+  animation:diyaFloat 3.5s ease-in-out infinite;
+  animation-delay:var(--delay,0s);
+}
+.diya-halo {
+  position:absolute;
+  left:10px;
+  top:0;
+  width:50px;
+  height:57px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffc45165,transparent 70%);
+  filter:blur(5px);
+  animation:haloPulse 1.4s infinite alternate;
+}
+.diya-wick {
+  position:absolute;
+  z-index:2;
+  top:32px;
+  left:33px;
+  width:3px;
+  height:15px;
+  background:#532814;
+  transform:rotate(7deg);
+}
+.diya-flame {
+  position:absolute;
+  z-index:3;
+  left:26px;
+  top:3px;
+  width:19px;
+  height:37px;
+  border-radius:78% 2% 73% 65%;
+  background:linear-gradient(25deg,#ff6a00 5%,#ffcf38 55%,#fffbc9);
+  transform:rotate(43deg);
+  transform-origin:bottom center;
+  filter:drop-shadow(0 0 9px #ffb12e);
+  animation:flameFlicker .95s ease-in-out infinite alternate;
+}
+.diya-flame:after {
+  content:"";
+  position:absolute;
+  left:6px;
+  bottom:5px;
+  width:8px;
+  height:17px;
+  border-radius:70% 0 70% 60%;
+  background:#fff8d6;
+}
+.diya-bowl {
+  position:absolute;
+  z-index:4;
+  bottom:6px;
+  left:2px;
+  width:64px;
+  height:27px;
+  border-radius:5px 5px 42px 42px;
+  background:linear-gradient(180deg,#ffe29a,#e88428 50%,#7d2e24);
+  border-bottom:3px solid #ffce66;
+  box-shadow:0 10px 25px #f5a74448;
+}
+.diya-bowl:before {
+  content:"";
+  position:absolute;
+  top:-6px;
+  left:0;
+  width:64px;
+  height:11px;
+  border-radius:50%;
+  background:linear-gradient(#ffebbb,#b6572f);
+  border:2px solid #ffd882;
+}
+.diya-bowl:after {
+  content:"✦ ✦ ✦";
+  position:absolute;
+  left:10px;
+  top:10px;
+  font-size:11px;
+  color:#ffe5a8;
+}
+@keyframes flameFlicker {
+  0% {transform:rotate(39deg) scale(.94,1.05);}
+  50% {transform:rotate(49deg) scale(.86,1.2);}
+  100% {transform:rotate(41deg) scale(1.04,.92);}
+}
+@keyframes haloPulse {
+  to {opacity:.6;transform:scale(1.3);}
+}
+@keyframes diyaFloat {
+  50% {transform:translateY(-7px);}
+}
+
+/* Layout */
+main {
+  position:relative;
+  z-index:1;
+  max-width:770px;
+  margin:0 auto;
+  padding:30px 16px 90px;
+}
+.steps {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+  margin-bottom:27px;
+}
+.step {
+  border:1px solid #755083;
+  background:#2a1b42;
+  border-radius:16px;
+  padding:16px 8px;
+  text-align:center;
+  color:#eee1ff;
+  font-size:12px;
+}
+.step span {
+  display:block;
+  font-size:26px;
+  margin-bottom:9px;
+  animation:floatIcon 4s ease-in-out infinite;
+}
+.step:nth-child(2) span {animation-delay:.7s;}
+.step:nth-child(3) span {animation-delay:1.4s;}
+@keyframes floatIcon {
+  50% {transform:translateY(-5px);}
+}
+
+.panel {
+  position:relative;
+  border:1px solid #9a6385;
+  border-radius:26px;
+  padding:35px;
+  background:linear-gradient(155deg,#351d51,#201335);
+  box-shadow:
+    0 20px 65px #0008,
+    0 0 45px #e5a44a15;
+  overflow:visible;
+}
+.panel:after {
+  content:"";
+  position:absolute;
+  inset:6px;
+  border-radius:21px;
+  border:1px solid #f2c56519;
+  pointer-events:none;
+}
+.heading {
+  margin:3px 0 10px;
+  font-size:clamp(23px,5vw,30px);
+  text-align:center;
+  color:#ffda86;
+  text-shadow:0 0 16px #ffc76c38;
+}
+.heading-rule {
+  height:3px;
+  width:82px;
+  border-radius:10px;
+  margin:0 auto 17px;
+  background:linear-gradient(90deg,transparent,#ffdf84,transparent);
+}
+.subtitle {
+  color:#d7c4e5;
+  text-align:center;
+  font-size:13px;
+  line-height:1.75;
+  margin:0 0 28px;
+}
+
+/* Animated form fields */
+.field {
+  margin:19px 0;
+  position:relative;
+  transition:transform .23s;
+}
+.field:focus-within {transform:translateY(-3px);}
+.field label {
+  display:block;
+  font-weight:700;
+  color:#f2dffb;
+  font-size:13px;
+  margin-bottom:9px;
+}
+.field input {
+  display:block;
+  height:53px;
+  width:100%;
+  border:1px solid #77548c;
+  background:#130d2a;
+  color:white;
+  border-radius:13px;
+  outline:none;
+  padding:0 15px;
+  font-size:15px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.field input::placeholder {color:#9b89b1;}
+.field input:focus {
+  border-color:#ffcb72;
+  box-shadow:0 0 0 3px #ffc16c1b,0 0 20px #ffbf6a23;
+}
+.hint {
+  font-size:12px;
+  line-height:1.7;
+  color:#bba9d0;
+  margin:10px 0 0;
+}
+.field-spark {
+  position:fixed;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ffe397;
+  box-shadow:0 0 12px #ffc354;
+  pointer-events:none;
+  z-index:150;
+  animation:sparkOut .7s ease-out forwards;
+}
+@keyframes sparkOut {
+  to {
+    transform:translate(var(--sx),var(--sy)) scale(.1);
+    opacity:0;
+  }
+}
+
+/* Dealer dropdown */
 .combo {position:relative;}
 .combo-input {position:relative;}
-.combo-input input {padding-right:52px;}
-.arrow-btn {
+.combo-input input {padding-right:55px;}
+.combo-btn {
   position:absolute;
-  right:6px;
   top:6px;
-  width:40px;
-  height:40px;
+  right:6px;
+  width:42px;
+  height:41px;
+  color:#ffe08d;
+  font-size:23px;
   border:0;
-  border-radius:9px;
-  background:#443064;
-  color:#ffd777;
-  font-size:22px;
+  border-radius:10px;
+  background:#513368;
 }
-.option-list {
+.combo-btn:hover {background:#684482;}
+.options {
   position:absolute;
-  z-index:30;
-  top:calc(100% + 5px);
+  top:calc(100% + 6px);
+  left:0;
   width:100%;
-  max-height:230px;
-  overflow:auto;
-  background:#271a46;
-  border:1px solid #bb88a4;
+  max-height:250px;
+  overflow-y:auto;
+  border:1px solid #b789ae;
   border-radius:12px;
-  padding:6px;
-  box-shadow:0 15px 35px #0008;
+  z-index:20;
+  background:#281940;
+  box-shadow:0 15px 32px #0008;
+  padding:5px;
 }
 .option {
   display:block;
   width:100%;
-  text-align:left;
-  background:transparent;
-  color:white;
-  border:0;
-  border-radius:8px;
+  color:#fff4e9;
   padding:12px;
+  border:0;
+  background:transparent;
+  text-align:left;
   font-size:14px;
+  border-radius:8px;
 }
 .option:hover,.option:focus {
-  background:#593768;
-  outline:none;
+  background:#5f3d75;
 }
-.empty {
-  color:#d0bfdc;
+.no-option {
+  padding:13px;
+  color:#d8c8e4;
   font-size:13px;
-  padding:12px;
 }
-.show-row,.consent-row {
+
+/* Checkboxes */
+.check-row {
   display:flex;
   align-items:flex-start;
   gap:10px;
-  margin-top:13px;
+  margin:12px 0 0;
 }
-.show-row input,.consent-row input {
+.check-row input {
   width:18px;
   height:18px;
-  accent-color:#f1bd54;
   flex-shrink:0;
+  accent-color:#eebd62;
 }
-.show-row label,.consent-row label {
-  color:#d8c9e6;
+.check-row label {
   font-size:12px;
-  line-height:1.65;
+  font-weight:normal;
+  color:#dfcfe8;
+  line-height:1.7;
+  margin:0;
 }
-.consent-row {margin:24px 0;}
+.consent {margin:25px 0;}
 
-.primary-btn {
+/* Submit */
+.submit-btn {
   width:100%;
-  min-height:55px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
+  min-height:57px;
   border:none;
-  border-radius:13px;
-  color:#381b12;
-  font-weight:800;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  color:#41250e;
   font-size:16px;
-  background:linear-gradient(110deg,#e79a34,#ffe18a,#f4ae43);
-  box-shadow:0 7px 22px #f5b33a44;
+  font-weight:800;
+  background:linear-gradient(110deg,#e99c38,#ffe3a0,#efa83d);
+  box-shadow:0 10px 30px #f4b04a46;
   transition:transform .2s,box-shadow .2s;
 }
-.primary-btn:hover {
+.submit-btn:hover {
   transform:translateY(-2px);
-  box-shadow:0 12px 28px #f5b33a66;
+  box-shadow:0 13px 35px #f4b04a65;
 }
-.primary-btn:active {transform:scale(.98);}
-.spinner {
-  width:20px;
-  height:20px;
-  border:3px solid #66371955;
-  border-top-color:#6b3618;
+.submit-btn:active {transform:scale(.98);}
+.loader {
+  width:19px;
+  height:19px;
   border-radius:50%;
+  border:3px solid #8a552d55;
+  border-top-color:#7e3e1d;
   animation:spin .7s linear infinite;
 }
 @keyframes spin {to {transform:rotate(360deg);}}
-.notice {
-  margin-top:22px;
-  padding:14px;
-  border:1px solid #765d8d;
+
+/* Errors only — no success notification boxes */
+.error-box {
+  margin-top:18px;
+  padding:13px 15px;
+  background:#4a1d37;
+  border:1px solid #e47d8e;
   border-radius:12px;
-  color:#f7e9ff;
-  background:#32204f;
-  text-align:center;
+  color:#ffe2e7;
   line-height:1.6;
   font-size:13px;
-  animation:noticeIn .35s ease-out;
+  text-align:center;
+  animation:errorAppear .28s ease-out;
 }
-.notice.success {
-  border-color:#4ba47a;
-  background:#183f37;
-  color:#beffd7;
-}
-.notice.error {
-  border-color:#e07a85;
-  background:#4c1d32;
-  color:#ffd5d9;
-}
-@keyframes noticeIn {
-  from {opacity:0;transform:translateY(10px);}
+@keyframes errorAppear {
+  from {opacity:0;transform:translateY(8px);}
   to {opacity:1;transform:translateY(0);}
 }
-
-/* Scratch prize */
-.scratch-wrap {
-  text-align:center;
-  animation:popIn .6s cubic-bezier(.18,1.5,.4,1);
+.retry-btn {
+  margin-top:10px;
+  border:1px solid #ffbcaa;
+  background:#783c54;
+  color:white;
+  padding:10px 18px;
+  border-radius:9px;
 }
-@keyframes popIn {
-  from {opacity:0;transform:scale(.85);}
-  to {opacity:1;transform:scale(1);}
+
+/* Scratch card only — no extra result panel */
+.scratch-view {
+  text-align:center;
+  animation:cardEnter .7s cubic-bezier(.2,1.3,.4,1);
+}
+@keyframes cardEnter {
+  from {opacity:0;transform:scale(.85) translateY(20px);}
+  to {opacity:1;transform:scale(1) translateY(0);}
 }
 .scratch-card {
   position:relative;
-  width:100%;
-  max-width:420px;
-  margin:23px auto 15px;
+  margin:25px auto 12px;
+  max-width:440px;
   overflow:hidden;
-  border-radius:21px;
-  border:5px solid #ffca62;
-  background:
-    radial-gradient(circle,#fff8da,#ffdfa3);
-  box-shadow:0 0 40px #ffb34a44;
+  background:radial-gradient(circle at 50% 35%,#fffbe0,#ffe09b);
+  border:6px solid #ffd176;
+  border-radius:22px;
+  box-shadow:0 0 40px #ffc15f4b;
 }
 .prize {
-  height:210px;
+  height:220px;
+  padding:18px;
   display:flex;
-  flex-direction:column;
   align-items:center;
+  flex-direction:column;
   justify-content:center;
-  padding:15px;
 }
-.prize-label {
-  font-size:17px;
+.prize-heading {
+  color:#805221;
+  font-size:20px;
   font-weight:800;
-  color:#805522;
 }
 .prize-amount {
-  font-size:clamp(30px,8vw,47px);
-  color:#0c8650;
+  color:#08794a;
+  font-size:clamp(37px,9vw,52px);
   font-weight:900;
-  margin:13px 0;
+  margin:15px 0 10px;
 }
 .prize-code {
-  color:#6a532b;
-  font-size:12px;
+  color:#78562b;
+  font-size:13px;
+  font-weight:700;
   overflow-wrap:anywhere;
 }
 #scratchCanvas {
   position:absolute;
   inset:0;
   width:100%;
-  height:210px;
-  touch-action:none;
+  height:220px;
   cursor:crosshair;
+  touch-action:none;
 }
-.result-box {
-  max-width:420px;
-  margin:20px auto;
-  padding:18px;
-  text-align:left;
-  border-radius:14px;
-  background:#3a2552;
-  border:1px solid #d6a756;
-  line-height:1.9;
-  font-size:14px;
-  overflow-wrap:anywhere;
+.scratch-card.revealed {
+  animation:winnerGlow 1.3s ease-in-out infinite alternate;
 }
-.result-box strong {color:#ffe6a3;}
-.result-box .reward-code {font-weight:800;}
-.footer {
-  padding:32px 16px;
-  text-align:center;
-  background:#130c28;
-  color:#a997bf;
-  font-size:12px;
-  line-height:1.9;
+@keyframes winnerGlow {
+  to {box-shadow:0 0 58px #ffd77a99;}
 }
+
+/* Full screen rockets / fireworks */
+#celebrationCanvas {
+  position:fixed;
+  z-index:100;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+/* Glitter confetti */
 .confetti {
   position:fixed;
-  z-index:9999;
-  top:-30px;
+  z-index:105;
   width:9px;
-  height:14px;
+  height:15px;
+  top:-25px;
   pointer-events:none;
-  animation:fall var(--duration) linear forwards;
+  animation:confettiFall var(--falltime) linear forwards;
 }
-@keyframes fall {
+@keyframes confettiFall {
   to {
-    transform:
-      translate(var(--dx),110vh)
-      rotate(var(--rot));
+    transform:translate(var(--drift),110vh)
+              rotate(var(--spin));
     opacity:0;
   }
 }
-/* Poster section preserved but intentionally hidden */
+
+/* Hidden poster area retained for future */
 .poster-zone[hidden] {display:none!important;}
-.poster-card img {width:100%;height:auto;border-radius:15px;}
+.poster-zone img {
+  display:block;
+  width:100%;
+  height:auto;
+  margin-bottom:22px;
+  border-radius:15px;
+}
+
+.footer {
+  position:relative;
+  text-align:center;
+  padding:30px 15px 45px;
+  font-size:12px;
+  line-height:1.9;
+  background:#110a20;
+  color:#baa9cc;
+}
+
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+}
 
 @media(max-width:550px) {
-  .hero {min-height:325px;padding:45px 14px;}
-  .card {padding:24px 18px;}
-  .info {font-size:11px;padding:12px 6px;}
-  .diya-row {gap:28px;}
-  .section-heading {font-size:24px;}
+  .hero {min-height:340px;padding:49px 15px 35px;}
+  .diya-row {gap:10px;margin-top:25px;}
+  .diya {transform:scale(.82);margin:0 -4px;}
+  .panel {padding:25px 17px;}
+  .step {padding:14px 5px;font-size:11px;}
+  .heading {font-size:23px;}
+  .prize {height:200px;}
+  #scratchCanvas {height:200px;}
 }
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after {
     animation-duration:.01ms!important;
     transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
   }
 }
 </style>
 </head>
+
 <body>
 
-<header class="hero" id="hero">
-  <canvas id="fireworks" aria-hidden="true"></canvas>
-  <div id="twinkleLayer" aria-hidden="true"></div>
+<div class="ambient" id="ambient" aria-hidden="true"></div>
+<canvas id="celebrationCanvas" aria-hidden="true"></canvas>
+
+<header class="hero">
+  <div class="toran" aria-hidden="true">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
 
   <div class="hero-content">
-    <div class="eyebrow">✨ Celebrate & Win ✨</div>
+    <div class="eyebrow">✦ FESTIVAL OF LIGHTS ✦</div>
     <h1>DIWALI DHAMAKA</h1>
-    <h2>🪔 Scratch & Win 🪔</h2>
+    <h2>✨ Scratch & Win ✨</h2>
     <p>
-      A festive surprise awaits you!<br>
-      Register, verify your dealer and reveal your gift.
+      Celebrate the festival with a surprise gift.<br>
+      Register, verify your dealer and reveal your reward!
     </p>
 
     <div class="diya-row" aria-hidden="true">
-      <span class="diya" style="--delay:0s">
-        <span class="flame"></span>
-        <span class="bowl"></span>
-      </span>
-      <span class="diya" style="--delay:.4s">
-        <span class="flame"></span>
-        <span class="bowl"></span>
-      </span>
-      <span class="diya" style="--delay:.8s">
-        <span class="flame"></span>
-        <span class="bowl"></span>
-      </span>
+      <div class="diya" style="--delay:0s">
+        <span class="diya-halo"></span>
+        <span class="diya-wick"></span>
+        <span class="diya-flame"></span>
+        <span class="diya-bowl"></span>
+      </div>
+      <div class="diya" style="--delay:.5s">
+        <span class="diya-halo"></span>
+        <span class="diya-wick"></span>
+        <span class="diya-flame"></span>
+        <span class="diya-bowl"></span>
+      </div>
+      <div class="diya" style="--delay:1s">
+        <span class="diya-halo"></span>
+        <span class="diya-wick"></span>
+        <span class="diya-flame"></span>
+        <span class="diya-bowl"></span>
+      </div>
+      <div class="diya" style="--delay:1.5s">
+        <span class="diya-halo"></span>
+        <span class="diya-wick"></span>
+        <span class="diya-flame"></span>
+        <span class="diya-bowl"></span>
+      </div>
+      <div class="diya" style="--delay:2s">
+        <span class="diya-halo"></span>
+        <span class="diya-wick"></span>
+        <span class="diya-flame"></span>
+        <span class="diya-bowl"></span>
+      </div>
     </div>
   </div>
 </header>
 
 <main>
 
-  <!-- FUTURE POSTERS:
-       Remove the hidden attribute when ready.
-       Upload poster1.jpg etc. to GitHub. -->
+  <!-- POSTERS PRESERVED, CURRENTLY HIDDEN.
+       Remove hidden when you want to show posters.
+       Upload poster1.jpg and poster2.jpg to GitHub. -->
   <section class="poster-zone" id="posterZone" hidden>
-    <div class="poster-card">
-      <img src="poster1.jpg" alt="Promotional poster 1">
-    </div>
-    <div class="poster-card">
-      <img src="poster2.jpg" alt="Promotional poster 2">
-    </div>
+    <img src="poster1.jpg" alt="Offer poster 1">
+    <img src="poster2.jpg" alt="Offer poster 2">
   </section>
 
-  <section class="info-strip" aria-label="How it works">
-    <div class="info"><span>📝</span>Fill Details</div>
-    <div class="info"><span>🏪</span>Verify Dealer</div>
-    <div class="info"><span>🎁</span>Scratch & Win</div>
-  </section>
+  <div class="steps">
+    <div class="step"><span>📝</span>Fill Details</div>
+    <div class="step"><span>🏪</span>Verify Dealer</div>
+    <div class="step"><span>🎁</span>Scratch & Win</div>
+  </div>
 
-  <section class="card" id="registration">
+  <section class="panel" id="registration">
 
     <div id="formView">
-      <h2 class="section-heading">
-        ✨ Lucky Draw Registration
-      </h2>
-      <div class="gold-line"></div>
-
+      <h2 class="heading">🪔 Lucky Draw Registration</h2>
+      <div class="heading-rule"></div>
       <p class="subtitle">
-        Enter your details and confirm your dealer
-        using either the registered mobile number
-        or dealer code.
+        Enter your details and verify your dealer
+        to unlock a special Diwali scratch card.
       </p>
 
       <form id="customerForm">
 
         <div class="field">
           <label for="customerName">Full Name</label>
-          <input id="customerName" required
-                 minlength="2" maxlength="80"
+          <input id="customerName"
+                 name="customerName"
                  placeholder="Enter your full name"
-                 autocomplete="name">
+                 minlength="2"
+                 maxlength="80"
+                 autocomplete="name"
+                 required>
         </div>
 
         <div class="field">
           <label for="mobile">Mobile Number</label>
-          <input id="mobile" required type="tel"
+          <input id="mobile"
+                 name="mobile"
+                 type="tel"
                  inputmode="numeric"
-                 pattern="[6-9][0-9]{9}"
                  maxlength="10"
-                 placeholder="Your 10-digit mobile number"
-                 autocomplete="tel-national">
+                 pattern="[6-9][0-9]{9}"
+                 placeholder="Enter your 10-digit mobile"
+                 required>
         </div>
 
         <div class="field">
           <label for="city">City</label>
-          <input id="city" required
-                 minlength="2" maxlength="70"
-                 placeholder="Enter your city">
+          <input id="city"
+                 name="city"
+                 minlength="2"
+                 maxlength="70"
+                 placeholder="Enter your city"
+                 required>
         </div>
 
         <div class="field">
           <label for="dealerInput">Select Dealer</label>
-
           <div class="combo" id="dealerCombo">
             <div class="combo-input">
-              <input id="dealerInput" required
+              <input id="dealerInput"
+                     name="dealer"
                      placeholder="Search or select dealer"
                      autocomplete="off"
                      role="combobox"
                      aria-expanded="false"
                      aria-controls="dealerList"
-                     aria-autocomplete="list">
-
+                     aria-autocomplete="list"
+                     required>
               <button type="button"
-                      class="arrow-btn"
+                      class="combo-btn"
                       id="dealerToggle"
-                      aria-label="Show dealers">⌄</button>
+                      aria-label="Show dealer names">
+                ⌄
+              </button>
             </div>
-            <div class="option-list"
-                 id="dealerList"
+            <div id="dealerList"
+                 class="options"
                  role="listbox"
                  hidden></div>
           </div>
-
           <p class="hint">
-            Start typing to search the dealer list.
-            Dealers are loaded from Google Sheets.
+            Start typing to search dealers from Google Sheets.
           </p>
         </div>
 
@@ -611,732 +809,1122 @@ main {
           <label for="dealerProof">
             Dealer Mobile Number OR Secret Code
           </label>
-
           <input id="dealerProof"
                  type="password"
                  maxlength="100"
-                 placeholder="Enter dealer mobile or code"
-                 autocomplete="off">
+                 autocomplete="off"
+                 placeholder="Enter dealer mobile or code">
 
-          <div class="show-row">
+          <div class="check-row">
             <input id="showProof" type="checkbox">
             <label for="showProof">Show entered value</label>
           </div>
           <p class="hint">
-            Either the dealer's registered mobile number
-            or their secret code can be used.
+            Either the dealer's registered mobile
+            number or their secret code is accepted.
           </p>
         </div>
 
-        <div class="consent-row">
+        <div class="check-row consent">
           <input id="consent" type="checkbox" required>
           <label for="consent">
             I agree to the campaign terms and consent
-            to the use of my details for participation,
-            voucher records and verification.
+            to the use of my submitted details for
+            campaign administration and voucher records.
           </label>
         </div>
 
-        <button id="submitButton" class="primary-btn"
-                type="submit">
+        <button id="submitButton"
+                type="submit"
+                class="submit-btn">
           <span id="submitText">✨ Unlock My Scratch Card</span>
-          <span id="submitSpinner" class="spinner" hidden></span>
+          <span id="loader" class="loader" hidden></span>
         </button>
-
       </form>
     </div>
 
-    <div id="scratchView" class="scratch-wrap" hidden>
-      <h2 class="section-heading">🎊 Your Lucky Scratch Card</h2>
+    <div id="scratchView" class="scratch-view" hidden>
+      <h2 class="heading">🎁 Your Lucky Scratch Card</h2>
       <p class="subtitle">
-        Rub the silver area with your finger or mouse.
-        Your surprise has already been assigned.
+        Scratch the silver area with your finger
+        or mouse to reveal your surprise.
       </p>
 
-      <div class="scratch-card">
+      <div class="scratch-card" id="scratchCard">
         <div class="prize">
-          <span id="prizeHeading" class="prize-label">
+          <div id="prizeHeading" class="prize-heading">
             Congratulations!
-          </span>
-          <div id="prizeAmount" class="prize-amount">₹0</div>
-          <span id="voucherOnCard" class="prize-code"></span>
+          </div>
+          <div id="prizeAmount" class="prize-amount"></div>
+          <div id="prizeCode" class="prize-code"></div>
         </div>
-
         <canvas id="scratchCanvas"
-                width="600" height="300"
-                aria-label="Scratch to reveal your reward"></canvas>
-      </div>
-
-      <div class="result-box" id="resultBox" hidden>
-        <div>🏪 Dealer: <strong id="resultDealer"></strong></div>
-        <div>🎁 Reward: <strong id="resultReward"></strong></div>
-        <div>
-          🎫 Voucher:
-          <strong class="reward-code" id="resultVoucher"></strong>
-        </div>
+                width="600"
+                height="300"
+                aria-label="Scratch card"></canvas>
       </div>
     </div>
 
-    <div class="notice" id="notice"
-         aria-live="polite" role="status" hidden></div>
+    <!-- Only real errors appear here. -->
+    <div id="errorBox" class="error-box"
+         role="alert" hidden>
+      <span id="errorText"></span>
+      <div>
+        <button type="button" class="retry-btn"
+                id="retryButton" hidden>
+          Retry Saving
+        </button>
+      </div>
+    </div>
+
+    <div id="srStatus" class="sr-only"
+         aria-live="polite"></div>
   </section>
 </main>
 
 <footer class="footer">
   🪔 Happy Diwali! 🪔<br>
   One entered mobile number can participate once.<br>
-  Rewards are subject to dealer budget and campaign terms.
+  Rewards depend on dealer budgets. Terms apply.
 </footer>
 
 <script>
 "use strict";
 
-/* GOOGLE APPS SCRIPT — ALREADY CONNECTED */
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbzYwMsUsHImx0rOSaWLW6UbCh1Bi2YA4WBrzIuFOSMBBV3kvWzdybgGPSDFvmVakM5x/exec";
+/* =============================================
+   GOOGLE APPS SCRIPT — ALREADY ADDED
+============================================= */
 
-const STORE = "diwali_draw_session_v4";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzYwMsUsHImx0rOSaWLW6UbCh1Bi2YA4WBrzIuFOSMBBV3kvWzdybgGPSDFvmVakM5x/exec";
+
+const STORE = "diwali_draw_session_v5";
 const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r => setTimeout(r,ms));
-const reduceMotion = matchMedia(
+const sleep = ms =>
+  new Promise(resolve => setTimeout(resolve, ms));
+
+const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
 let dealers = [];
-let loadingDealers = false;
+let loading = false;
 let sending = false;
-let activeSession = null;
-let activeResult = null;
-let revealing = false;
+let session = null;
+let currentReward = null;
+let syncingReveal = false;
+let hasRevealed = false;
+let resetTimer = null;
 
-/* ---------- UI FEEDBACK ---------- */
-function notice(text, type = "") {
-  const el = $("notice");
-  el.hidden = false;
-  el.textContent = text;
-  el.className = "notice " + type;
-  el.style.animation = "none";
-  void el.offsetWidth;
-  el.style.animation = "";
+/* =============================================
+   ERRORS ONLY — NO SUCCESS BOXES
+============================================= */
+
+function showError(text, allowRetry = false) {
+  $("errorText").textContent = text;
+  $("errorBox").hidden = false;
+  $("retryButton").hidden = !allowRetry;
 }
 
-function setBusy(on) {
-  sending = on;
-  $("submitButton").disabled = on;
-  $("submitSpinner").hidden = !on;
-  $("submitText").textContent = on
-    ? "Verifying & Preparing Your Gift..."
+function clearError() {
+  $("errorText").textContent = "";
+  $("errorBox").hidden = true;
+  $("retryButton").hidden = true;
+}
+
+function busy(state) {
+  sending = state;
+  $("submitButton").disabled = state;
+  $("loader").hidden = !state;
+  $("submitText").textContent = state
+    ? "Preparing Your Lucky Gift..."
     : "✨ Unlock My Scratch Card";
 }
 
-/* ---------- JSONP READS ---------- */
-function apiGet(action, params = {}) {
-  return new Promise((resolve,reject) => {
-    const callback = "cb_" +
-      crypto.randomUUID().replace(/-/g,"");
-    const script = document.createElement("script");
-    let timer;
+function announce(text) {
+  $("srStatus").textContent = text;
+}
 
-    function clean() {
-      clearTimeout(timer);
+/* =============================================
+   FESTIVE INPUT SPARKLES
+============================================= */
+
+function sparkleNear(el, count = 5) {
+  if (reducedMotion) return;
+
+  const rect = el.getBoundingClientRect();
+
+  for (let i = 0; i < count; i++) {
+    const spark = document.createElement("span");
+    spark.className = "field-spark";
+
+    spark.style.left =
+      rect.left + Math.random() * rect.width + "px";
+    spark.style.top =
+      rect.top + Math.random() * rect.height + "px";
+
+    spark.style.setProperty(
+      "--sx", (Math.random() - .5) * 90 + "px"
+    );
+    spark.style.setProperty(
+      "--sy", (-25 - Math.random() * 60) + "px"
+    );
+
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 750);
+  }
+}
+
+document.querySelectorAll(".field input").forEach(el => {
+  el.addEventListener("focus", () => {
+    clearError();
+    sparkleNear(el);
+  });
+});
+
+$("mobile").addEventListener("input", e => {
+  e.target.value = e.target.value
+    .replace(/\D/g, "")
+    .slice(0, 10);
+});
+
+/* =============================================
+   GOOGLE APPS SCRIPT JSONP READ
+============================================= */
+
+function apiGet(action, extra = {}) {
+  return new Promise((resolve, reject) => {
+    const callback = "cb_" +
+      crypto.randomUUID().replace(/-/g, "");
+
+    const script = document.createElement("script");
+
+    let timeout;
+
+    function cleanup() {
+      clearTimeout(timeout);
       delete window[callback];
       script.remove();
     }
+
     window[callback] = data => {
-      clean();
+      cleanup();
       resolve(data);
     };
+
     script.onerror = () => {
-      clean();
-      reject(new Error("Connection failed."));
+      cleanup();
+      reject(new Error("Unable to reach Google Sheets."));
     };
-    timer = setTimeout(() => {
-      clean();
-      reject(new Error("Server request timed out."));
-    },15000);
+
+    timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error("The server request timed out."));
+    }, 15000);
 
     const url = new URL(API_URL);
     url.searchParams.set("action", action);
     url.searchParams.set("callback", callback);
     url.searchParams.set("nonce", crypto.randomUUID());
 
-    Object.entries(params).forEach(([k,v]) =>
-      url.searchParams.set(k,v)
-    );
+    Object.entries(extra).forEach(([key, value]) => {
+      url.searchParams.set(key, value);
+    });
 
     script.src = url.toString();
     document.head.appendChild(script);
   });
 }
 
-/* POST is written cross-origin. The result is
-   confirmed separately using request status polling. */
-function apiPost(fields) {
-  return fetch(API_URL,{
-    method:"POST",
-    mode:"no-cors",
-    body:new URLSearchParams(fields)
+/* =============================================
+   POST WRITE — STATUS CONFIRMED SEPARATELY
+============================================= */
+
+function apiPost(data) {
+  return fetch(API_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: new URLSearchParams(data)
   });
 }
 
-/* ---------- DEALER SEARCH ---------- */
-function exactDealer() {
-  const typed = $("dealerInput").value.trim().toLowerCase();
-  return dealers.find(d => d.toLowerCase() === typed) || "";
+async function pollStatus(s, requireScratched = false) {
+  for (let i = 0; i < 25; i++) {
+    await sleep(1200);
+
+    try {
+      const result = await apiGet("status", {
+        requestId: s.requestId,
+        receipt: s.receipt
+      });
+
+      if (result.ok) {
+        if (!requireScratched || result.scratched) {
+          return result;
+        }
+        continue;
+      }
+
+      if (result.code === "PENDING" ||
+          result.code === "SERVER_ERROR") {
+        continue;
+      }
+
+      return result;
+
+    } catch (err) {
+      // Temporary errors: keep trying.
+    }
+  }
+
+  return null;
 }
 
-function closeDealers() {
-  $("dealerList").hidden = true;
-  $("dealerInput").setAttribute("aria-expanded","false");
+/* =============================================
+   DEALER SEARCHABLE DROPDOWN
+============================================= */
+
+function selectedDealer() {
+  const value = $("dealerInput").value
+    .trim().toLowerCase();
+
+  return dealers.find(d =>
+    d.toLowerCase() === value
+  ) || "";
 }
 
-function updateProof() {
-  const valid = Boolean(exactDealer());
+function updateDealerProof() {
+  const valid = Boolean(selectedDealer());
   $("proofField").hidden = !valid;
   $("dealerProof").required = valid;
 }
 
-function renderDealers() {
+function closeDealerList() {
+  $("dealerList").hidden = true;
+  $("dealerInput").setAttribute(
+    "aria-expanded", "false"
+  );
+}
+
+function renderDealerList() {
   const list = $("dealerList");
   list.replaceChildren();
 
-  const query = $("dealerInput").value.trim().toLowerCase();
-  const matching = dealers.filter(name =>
+  const query = $("dealerInput").value
+    .trim().toLowerCase();
+
+  const matches = dealers.filter(name =>
     name.toLowerCase().includes(query)
   );
 
-  if (!matching.length) {
+  if (!matches.length) {
     const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "No matching dealers found.";
+    empty.className = "no-option";
+    empty.textContent = "No matching dealer found.";
     list.appendChild(empty);
     return;
   }
 
-  matching.slice(0,100).forEach(name => {
+  matches.slice(0, 100).forEach(name => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "option";
-    btn.setAttribute("role","option");
+    btn.setAttribute("role", "option");
     btn.textContent = "🏪  " + name;
 
-    btn.addEventListener("click",() => {
+    btn.onclick = () => {
       $("dealerInput").value = name;
-      closeDealers();
-      updateProof();
+      closeDealerList();
+      updateDealerProof();
+      sparkleNear($("dealerInput"), 10);
       $("dealerProof").focus();
-    });
+    };
+
     list.appendChild(btn);
   });
 }
 
-function openDealers() {
+function openDealerList() {
   $("dealerList").hidden = false;
-  $("dealerInput").setAttribute("aria-expanded","true");
-  renderDealers();
+  $("dealerInput").setAttribute(
+    "aria-expanded", "true"
+  );
+  renderDealerList();
 }
 
 async function loadDealers() {
-  if (loadingDealers) return;
-  loadingDealers = true;
+  if (loading) return;
+
+  loading = true;
 
   try {
     const result = await apiGet("dealers");
+
     if (!result.ok || !Array.isArray(result.dealers)) {
-      throw new Error(
-        result.message || "Dealer list is unavailable."
-      );
+      throw new Error("Dealer list could not be loaded.");
     }
 
     dealers = result.dealers;
-    updateProof();
+    updateDealerProof();
 
-    if (!$("dealerList").hidden) renderDealers();
+    if (!$("dealerList").hidden) {
+      renderDealerList();
+    }
+
   } catch (err) {
-    notice(
-      "Could not load dealers. Please check the " +
-      "Google Apps Script deployment.",
-      "error"
+    showError(
+      "Unable to load dealers. Please try again."
     );
   } finally {
-    loadingDealers = false;
+    loading = false;
   }
 }
 
-$("dealerInput").addEventListener("focus",() => {
-  openDealers();
+$("dealerInput").addEventListener("focus", () => {
+  openDealerList();
   loadDealers();
 });
-$("dealerInput").addEventListener("input",() => {
-  updateProof();
-  openDealers();
+
+$("dealerInput").addEventListener("input", () => {
+  updateDealerProof();
+  openDealerList();
 });
-$("dealerToggle").addEventListener("click",() => {
+
+$("dealerToggle").onclick = () => {
   if ($("dealerList").hidden) {
-    openDealers();
+    openDealerList();
     loadDealers();
     $("dealerInput").focus();
   } else {
-    closeDealers();
+    closeDealerList();
   }
-});
-$("dealerInput").addEventListener("keydown",e => {
-  if (e.key === "Escape") closeDealers();
+};
+
+$("dealerInput").addEventListener("keydown", e => {
+  if (e.key === "Escape") closeDealerList();
+
   if (e.key === "ArrowDown") {
     e.preventDefault();
-    openDealers();
+    openDealerList();
     $("dealerList").querySelector(".option")?.focus();
   }
 });
-document.addEventListener("pointerdown",e => {
-  if (!$("dealerCombo").contains(e.target)) closeDealers();
-});
-$("showProof").addEventListener("change",() => {
-  $("dealerProof").type = $("showProof").checked
-    ? "text" : "password";
-});
-$("mobile").addEventListener("input",e => {
-  e.target.value = e.target.value.replace(/\D/g,"").slice(0,10);
+
+document.addEventListener("pointerdown", e => {
+  if (!$("dealerCombo").contains(e.target)) {
+    closeDealerList();
+  }
 });
 
-/* ---------- SESSION STORAGE ---------- */
+$("showProof").addEventListener("change", () => {
+  $("dealerProof").type = $("showProof").checked
+    ? "text"
+    : "password";
+});
+
+/* =============================================
+   REQUEST SESSION
+============================================= */
+
 function saveSession(s) {
-  activeSession = s;
-  sessionStorage.setItem(STORE,JSON.stringify(s));
+  session = s;
+  sessionStorage.setItem(STORE, JSON.stringify(s));
 }
+
 function readSession() {
   try {
     return JSON.parse(sessionStorage.getItem(STORE));
-  } catch(e) {
+  } catch (_) {
     return null;
   }
 }
-function clearSession() {
-  activeSession = null;
+
+function removeSession() {
+  session = null;
   sessionStorage.removeItem(STORE);
 }
 
-/* ---------- WAIT FOR GOOGLE SHEET RESPONSE ---------- */
-async function poll(session,needScratched = false) {
-  for(let i=0;i<25;i++) {
-    await sleep(1500);
+/* =============================================
+   FORM SUBMISSION
+============================================= */
+
+$("customerForm").addEventListener(
+  "submit", async event => {
+    event.preventDefault();
+
+    if (sending) return;
+    if (!$("customerForm").reportValidity()) return;
+
+    const dealer = selectedDealer();
+    const mobile = $("mobile").value.trim();
+    const proof = $("dealerProof").value.trim();
+
+    if (!dealer) {
+      showError(
+        "Please select a valid dealer from the list."
+      );
+      return;
+    }
+
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+      showError(
+        "Please enter a valid 10-digit mobile number."
+      );
+      return;
+    }
+
+    if (!proof) {
+      showError(
+        "Please enter the dealer mobile number or code."
+      );
+      return;
+    }
+
+    clearError();
+    busy(true);
+    sparkleNear($("submitButton"), 18);
+
+    const customer = {
+      customerName: $("customerName").value.trim(),
+      mobile,
+      city: $("city").value.trim(),
+      dealerName: dealer
+    };
+
+    const previous = readSession();
+
+    const same = previous &&
+      previous.customerName === customer.customerName &&
+      previous.mobile === customer.mobile &&
+      previous.city === customer.city &&
+      previous.dealerName === customer.dealerName;
+
+    const s = same ? previous : {
+      requestId: crypto.randomUUID(),
+      receipt: crypto.randomUUID(),
+      ...customer
+    };
+
+    saveSession(s);
+
     try {
-      const data = await apiGet("status",{
-        requestId:session.requestId,
-        receipt:session.receipt
-      });
+      // Dealer secret is not stored in sessionStorage.
+      apiPost({
+        action: "claim",
+        requestId: s.requestId,
+        receipt: s.receipt,
+        ...customer,
+        dealerProof: proof,
+        consent: $("consent").checked ? "yes" : "no"
+      }).catch(() => {});
 
-      if(data.ok) {
-        if(!needScratched || data.scratched) return data;
-        continue;
+      const result = await pollStatus(s);
+
+      if (!result) {
+        throw new Error(
+          "The server has not confirmed your request. " +
+          "Please retry with the same details."
+        );
       }
-      if(data.code === "PENDING" ||
-         data.code === "SERVER_ERROR") continue;
 
-      return data;
-    } catch(e) {
-      // Retry temporary network failures.
+      if (!result.ok) {
+        removeSession();
+        throw new Error(
+          result.message || "Registration failed."
+        );
+      }
+
+      currentReward = result;
+      displayScratch(result);
+
+      // Small opening rocket celebration.
+      launchFireworks(false);
+      announce("Your lucky scratch card is ready.");
+
+    } catch (err) {
+      showError(err.message);
+
+    } finally {
+      busy(false);
     }
   }
-  return null;
-}
+);
 
-/* ---------- SUBMIT ANIMATIONS AND FORM ---------- */
-$("customerForm").addEventListener("submit",async e => {
-  e.preventDefault();
-  if(sending) return;
-  if(!$("customerForm").reportValidity()) return;
+/* =============================================
+   SCRATCH CARD DISPLAY
+============================================= */
 
-  const dealer = exactDealer();
-  const mobile = $("mobile").value.trim();
-  const proof = $("dealerProof").value.trim();
-
-  if(!dealer) {
-    notice("Please select a valid dealer from the list.","error");
-    return;
-  }
-  if(!/^[6-9]\d{9}$/.test(mobile)) {
-    notice("Please enter a valid 10-digit mobile number.","error");
-    return;
-  }
-  if(!proof) {
-    notice(
-      "Please enter your dealer mobile number or secret code.",
-      "error"
-    );
-    return;
-  }
-
-  const customer = {
-    customerName:$("customerName").value.trim(),
-    mobile,
-    city:$("city").value.trim(),
-    dealerName:dealer
-  };
-
-  const last = readSession();
-  const same = last &&
-    last.customerName === customer.customerName &&
-    last.mobile === customer.mobile &&
-    last.city === customer.city &&
-    last.dealerName === customer.dealerName;
-
-  const session = same ? last : {
-    requestId:crypto.randomUUID(),
-    receipt:crypto.randomUUID(),
-    ...customer
-  };
-
-  saveSession(session);
-  setBusy(true);
-  notice("✨ Checking dealer verification and latest budget...");
-
-  try {
-    // No dealer mobile or secret is ever saved in sessionStorage.
-    apiPost({
-      action:"claim",
-      requestId:session.requestId,
-      receipt:session.receipt,
-      ...customer,
-      dealerProof:proof,
-      consent:$("consent").checked ? "yes" : "no"
-    }).catch(() => {});
-
-    const result = await poll(session);
-
-    if(!result) {
-      throw new Error(
-        "Server confirmation is taking longer than expected. " +
-        "Please retry with the same details."
-      );
-    }
-
-    if(!result.ok) {
-      // Rejected requests are replaced with fresh credentials.
-      clearSession();
-      throw new Error(
-        result.message || "Registration could not be completed."
-      );
-    }
-
-    activeResult = result;
-    displayScratch(result);
-    celebrate(35);
-    notice(
-      "✅ Dealer verified! Your scratch card is ready.",
-      "success"
-    );
-  } catch(err) {
-    notice(err.message,"error");
-  } finally {
-    setBusy(false);
-  }
-});
-
-/* ---------- SCRATCH RESULT ---------- */
 function displayScratch(result) {
-  activeResult = result;
-  revealing = false;
+  currentReward = result;
+  hasRevealed = false;
+  syncingReveal = false;
 
   $("formView").hidden = true;
   $("scratchView").hidden = false;
-  $("resultBox").hidden = true;
+  $("scratchCard").classList.remove("revealed");
+  clearError();
 
   const amount = Number(result.amount || 0);
 
   $("prizeHeading").textContent =
-    amount > 0 ? "Congratulations!" : "Better Luck Next Time";
+    amount > 0
+      ? "🎉 Congratulations!"
+      : "Better Luck Next Time";
 
   $("prizeAmount").textContent =
     amount > 0 ? "₹" + amount : "No Reward";
 
-  $("resultDealer").textContent = result.dealer || "";
-  $("resultReward").textContent = "₹" + amount;
-  $("resultVoucher").textContent =
-    result.voucher || "No Voucher";
+  $("prizeCode").textContent =
+    amount > 0
+      ? "Voucher: " + result.voucher
+      : "No voucher for this entry";
 
-  $("voucherOnCard").textContent = "";
-
-  if(result.scratched) {
+  if (result.scratched) {
     finishVisualReveal();
-    notice("Your previous reward has been restored.","success");
+    setResetTimer(10000);
     return;
   }
 
-  setupScratch();
+  initializeScratch();
 }
 
 function finishVisualReveal() {
   $("scratchCanvas").style.display = "none";
-  $("resultBox").hidden = false;
-  $("voucherOnCard").textContent =
-    Number(activeResult?.amount || 0) > 0
-      ? "Voucher: " + activeResult.voucher
-      : "Rewards are exhausted for this dealer.";
+  $("scratchCard").classList.add("revealed");
 }
 
-async function markScratched() {
-  if(revealing || !activeSession) return;
-  revealing = true;
+/* =============================================
+   SAVE SCRATCH IN GOOGLE SHEET
+============================================= */
+
+async function saveScratch() {
+  if (syncingReveal || !session) return;
+
+  syncingReveal = true;
+  hasRevealed = true;
+  clearError();
+
+  const scratchedAt = Date.now();
+
   finishVisualReveal();
-  celebrate(90);
-  notice("🎉 Reward revealed! Updating Google Sheets...");
+
+  // Grand Diwali rockets, fireworks and golden confetti.
+  launchFireworks(true);
+  burstConfetti(110);
 
   try {
-    apiPost({
-      action:"reveal",
-      requestId:activeSession.requestId,
-      receipt:activeSession.receipt
-    }).catch(() => {});
+    await syncScratchStatus();
 
-    const result = await poll(activeSession,true);
-    if(!result || !result.ok || !result.scratched) {
-      throw new Error(
-        "Your reward was assigned, but scratch status " +
-        "could not be confirmed. Reload to retry."
-      );
-    }
-    activeResult = result;
-    notice("🎊 Scratch completed and saved successfully!","success");
-  } catch(err) {
-    revealing = false;
-    notice(err.message,"error");
+    announce("Your scratch result has been saved.");
+
+    // Reset 10 seconds after the visual scratch,
+    // provided Google Sheets has confirmed saving.
+    const elapsed = Date.now() - scratchedAt;
+    setResetTimer(Math.max(0, 10000 - elapsed));
+
+  } catch (err) {
+    showError(
+      "Your reward is assigned, but scratch saving " +
+      "could not be confirmed. Please retry.",
+      true
+    );
+  } finally {
+    syncingReveal = false;
   }
 }
 
-/* ---------- REAL FINGER / MOUSE SCRATCH ---------- */
-function setupScratch() {
+async function syncScratchStatus() {
+  if (!session) {
+    throw new Error("Session not available.");
+  }
+
+  apiPost({
+    action: "reveal",
+    requestId: session.requestId,
+    receipt: session.receipt
+  }).catch(() => {});
+
+  const result = await pollStatus(session, true);
+
+  if (!result || !result.ok || !result.scratched) {
+    throw new Error("Scratch synchronization failed.");
+  }
+
+  currentReward = result;
+}
+
+$("retryButton").addEventListener("click", async () => {
+  if (syncingReveal || !hasRevealed) return;
+
+  syncingReveal = true;
+  $("retryButton").disabled = true;
+
+  try {
+    await syncScratchStatus();
+    clearError();
+    setResetTimer(10000);
+  } catch (err) {
+    showError(
+      "Unable to confirm the scratch result. " +
+      "Please retry.",
+      true
+    );
+  } finally {
+    syncingReveal = false;
+    $("retryButton").disabled = false;
+  }
+});
+
+/* =============================================
+   REAL SCRATCH-CARD ANIMATION
+============================================= */
+
+function initializeScratch() {
   const canvas = $("scratchCanvas");
-  const ctx = canvas.getContext("2d",{
-    willReadFrequently:true
+  const ctx = canvas.getContext("2d", {
+    willReadFrequently: true
   });
 
   canvas.style.display = "block";
+
   ctx.globalCompositeOperation = "source-over";
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const gradient = ctx.createLinearGradient(0,0,600,300);
-  gradient.addColorStop(0,"#7b8193");
-  gradient.addColorStop(.5,"#e0e5ee");
-  gradient.addColorStop(1,"#8e96a9");
+  const silver = ctx.createLinearGradient(
+    0, 0, canvas.width, canvas.height
+  );
 
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  silver.addColorStop(0, "#7d879a");
+  silver.addColorStop(.3, "#d8e0ec");
+  silver.addColorStop(.55, "#f1f4f9");
+  silver.addColorStop(1, "#8994a7");
 
-  ctx.fillStyle = "#30374b";
+  ctx.fillStyle = silver;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#343e51";
   ctx.textAlign = "center";
-  ctx.font = "bold 37px Arial";
-  ctx.fillText("SCRATCH HERE",300,150);
+  ctx.font = "bold 38px Arial";
+
+  ctx.fillText(
+    "SCRATCH HERE",
+    canvas.width / 2,
+    canvas.height / 2
+  );
 
   let drawing = false;
   let done = false;
 
-  function point(e) {
-    const r = canvas.getBoundingClientRect();
+  function point(event) {
+    const rect = canvas.getBoundingClientRect();
+
     return {
-      x:(e.clientX-r.left)*canvas.width/r.width,
-      y:(e.clientY-r.top)*canvas.height/r.height
+      x: (event.clientX - rect.left) *
+        canvas.width / rect.width,
+      y: (event.clientY - rect.top) *
+        canvas.height / rect.height
     };
   }
 
   canvas.onpointerdown = e => {
-    if(done) return;
-    drawing = true;
+    if (done) return;
+
     e.preventDefault();
+    drawing = true;
     canvas.setPointerCapture(e.pointerId);
 
     const p = point(e);
+
     ctx.globalCompositeOperation = "destination-out";
     ctx.lineWidth = 65;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-    ctx.lineTo(p.x+.1,p.y);
+    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(p.x + .1, p.y);
     ctx.stroke();
   };
 
   canvas.onpointermove = e => {
-    if(!drawing || done) return;
+    if (!drawing || done) return;
+
     e.preventDefault();
+
     const p = point(e);
-    ctx.lineTo(p.x,p.y);
+    ctx.lineTo(p.x, p.y);
     ctx.stroke();
   };
 
-  function stop() {
-    if(!drawing || done) return;
+  function endScratch() {
+    if (!drawing || done) return;
+
     drawing = false;
     ctx.closePath();
 
     const pixels = ctx.getImageData(
-      0,0,canvas.width,canvas.height
+      0, 0, canvas.width, canvas.height
     ).data;
 
-    let erased=0,total=0;
-    for(let i=3;i<pixels.length;i+=64) {
+    let erased = 0;
+    let total = 0;
+
+    for (let i = 3; i < pixels.length; i += 64) {
       total++;
-      if(pixels[i]<80) erased++;
+      if (pixels[i] < 80) erased++;
     }
 
-    if(total && erased/total>=.35) {
-      done=true;
-      markScratched();
+    if (total && erased / total >= .34) {
+      done = true;
+      saveScratch();
     }
   }
 
-  canvas.onpointerup = stop;
-  canvas.onpointercancel = stop;
+  canvas.onpointerup = endScratch;
+  canvas.onpointercancel = endScratch;
 }
 
-/* ---------- CONFETTI ---------- */
-function celebrate(count=60) {
-  if(reduceMotion) return;
+/* =============================================
+   AUTO-RESET AFTER 10 SECONDS
+============================================= */
 
-  const colors = [
-    "#ffcb65","#ff80b0","#a77aff",
-    "#88e8d3","#fff0a1"
-  ];
-
-  for(let i=0;i<count;i++) {
-    const piece = document.createElement("span");
-    piece.className = "confetti";
-    piece.style.left = Math.random()*100+"vw";
-    piece.style.background =
-      colors[Math.floor(Math.random()*colors.length)];
-    piece.style.setProperty("--duration",
-      (2+Math.random()*2)+"s");
-    piece.style.setProperty("--dx",
-      (Math.random()-.5)*250+"px");
-    piece.style.setProperty("--rot",
-      Math.random()*900+"deg");
-
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(),4500);
-  }
-
-  extraFireworks = 4;
+function setResetTimer(delay) {
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(resetHome, delay);
 }
 
-/* ---------- LIVE DIWALI FIREWORKS ---------- */
-const hero = $("hero");
-const sky = $("fireworks");
-const fx = sky.getContext("2d");
-let particles = [];
-let frameCount=0;
-let extraFireworks=0;
+function resetHome() {
+  clearTimeout(resetTimer);
+  resetTimer = null;
 
-function resizeSky() {
-  sky.width = Math.max(1,hero.clientWidth);
-  sky.height = Math.max(1,hero.clientHeight);
+  removeSession();
+  currentReward = null;
+  hasRevealed = false;
+  syncingReveal = false;
+
+  $("customerForm").reset();
+  $("dealerInput").value = "";
+  $("dealerProof").value = "";
+  $("dealerProof").type = "password";
+
+  $("formView").hidden = false;
+  $("scratchView").hidden = true;
+  $("scratchCard").classList.remove("revealed");
+
+  closeDealerList();
+  updateDealerProof();
+  clearError();
+  busy(false);
+
+  announce("Registration form is ready.");
+
+  window.scrollTo({
+    top: 0,
+    behavior: reducedMotion ? "instant" : "smooth"
+  });
+
+  loadDealers();
 }
-resizeSky();
-window.addEventListener("resize",resizeSky);
 
-function firework() {
-  const x = sky.width*(.12+Math.random()*.76);
-  const y = sky.height*(.10+Math.random()*.65);
-  const colors = ["#ffc85a","#ff7fba","#e7b8ff","#ffffff"];
-  const color = colors[Math.floor(Math.random()*colors.length)];
+/* =============================================
+   FULL-SCREEN ANIMATED DIWALI FIREWORKS
+============================================= */
 
-  for(let i=0;i<32;i++) {
-    const angle = Math.PI*2*i/32;
-    const speed = 1+Math.random()*2.3;
-    particles.push({
-      x,y,
-      vx:Math.cos(angle)*speed,
-      vy:Math.sin(angle)*speed,
-      life:70,
-      color
+const fxCanvas = $("celebrationCanvas");
+const fx = fxCanvas.getContext("2d");
+
+let fxWidth = 0;
+let fxHeight = 0;
+let rockets = [];
+let sparks = [];
+let animationRunning = false;
+let animationEnd = 0;
+let lastLaunch = 0;
+let launchGap = 280;
+
+const fireColors = [
+  "#ffd36e",
+  "#ff7d96",
+  "#ffe8bc",
+  "#bf8cff",
+  "#79edcf",
+  "#ff9e48"
+];
+
+function fitFireworks() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+  fxWidth = window.innerWidth;
+  fxHeight = window.innerHeight;
+
+  fxCanvas.width = Math.round(fxWidth * ratio);
+  fxCanvas.height = Math.round(fxHeight * ratio);
+
+  fx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+window.addEventListener("resize", fitFireworks);
+fitFireworks();
+
+function makeRocket() {
+  const x = fxWidth * (.1 + Math.random() * .8);
+  const targetY = fxHeight * (.12 + Math.random() * .4);
+
+  rockets.push({
+    x,
+    y: fxHeight + 15,
+    targetY,
+    vx: (Math.random() - .5) * 1.8,
+    vy: -7 - Math.random() * 3,
+    color: fireColors[
+      Math.floor(Math.random() * fireColors.length)
+    ]
+  });
+}
+
+function explode(x, y, color) {
+  const amount = 48;
+
+  for (let i = 0; i < amount; i++) {
+    const angle = Math.PI * 2 * i / amount;
+    const velocity = 1.6 + Math.random() * 3.6;
+
+    sparks.push({
+      x, y,
+      vx: Math.cos(angle) * velocity,
+      vy: Math.sin(angle) * velocity,
+      alpha: 1,
+      color,
+      radius: 1.5 + Math.random() * 1.7,
+      gravity: .035
     });
   }
-}
 
-function animateSky() {
-  fx.clearRect(0,0,sky.width,sky.height);
+  // Bright secondary golden flash
+  for (let i = 0; i < 14; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const v = Math.random() * 2.3;
 
-  frameCount++;
-  if(frameCount%78===0 || extraFireworks>0) {
-    firework();
-    if(extraFireworks>0) extraFireworks--;
+    sparks.push({
+      x, y,
+      vx: Math.cos(angle) * v,
+      vy: Math.sin(angle) * v,
+      alpha: 1,
+      color: "#fff4ca",
+      radius: 2,
+      gravity: .02
+    });
   }
 
-  particles.forEach(p => {
-    p.x+=p.vx;
-    p.y+=p.vy;
-    p.vy+=.013;
-    p.vx*=.992;
-    p.life--;
+  // Keep particle counts manageable on phones.
+  if (sparks.length > 950) {
+    sparks.splice(0, sparks.length - 950);
+  }
+}
 
-    fx.globalAlpha = Math.max(0,p.life/70);
+function animateFireworks(now) {
+  fx.clearRect(0, 0, fxWidth, fxHeight);
+
+  if (now < animationEnd &&
+      now - lastLaunch >= launchGap) {
+    makeRocket();
+    lastLaunch = now;
+  }
+
+  rockets = rockets.filter(r => {
+    r.x += r.vx;
+    r.y += r.vy;
+
     fx.beginPath();
-    fx.arc(p.x,p.y,2.1,0,Math.PI*2);
-    fx.fillStyle = p.color;
-    fx.fill();
+    fx.moveTo(r.x, r.y + 23);
+    fx.lineTo(r.x, r.y);
+    fx.strokeStyle = r.color;
+    fx.lineWidth = 3;
+    fx.shadowBlur = 15;
+    fx.shadowColor = r.color;
+    fx.stroke();
+    fx.shadowBlur = 0;
+
+    if (r.y <= r.targetY) {
+      explode(r.x, r.y, r.color);
+      return false;
+    }
+    return true;
   });
+
+  sparks = sparks.filter(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += p.gravity;
+    p.vx *= .988;
+    p.alpha -= .015;
+
+    if (p.alpha <= 0) return false;
+
+    fx.globalAlpha = p.alpha;
+    fx.beginPath();
+    fx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    fx.fillStyle = p.color;
+    fx.shadowColor = p.color;
+    fx.shadowBlur = 10;
+    fx.fill();
+
+    return true;
+  });
+
   fx.globalAlpha = 1;
-  particles = particles.filter(p=>p.life>0);
+  fx.shadowBlur = 0;
 
-  requestAnimationFrame(animateSky);
+  if (now < animationEnd ||
+      rockets.length ||
+      sparks.length) {
+    requestAnimationFrame(animateFireworks);
+  } else {
+    animationRunning = false;
+    fx.clearRect(0, 0, fxWidth, fxHeight);
+  }
 }
 
-if(!reduceMotion) {
-  requestAnimationFrame(animateSky);
+function launchFireworks(grand = false) {
+  if (reducedMotion) return;
+
+  const now = performance.now();
+
+  animationEnd = Math.max(
+    animationEnd,
+    now + (grand ? 6800 : 2400)
+  );
+
+  launchGap = grand ? 190 : 450;
+
+  // Instant launch when the card appears.
+  for (let i = 0; i < (grand ? 4 : 2); i++) {
+    makeRocket();
+  }
+
+  if (!animationRunning) {
+    animationRunning = true;
+    lastLaunch = now;
+    requestAnimationFrame(animateFireworks);
+  }
 }
 
-/* ---------- SPARKLING LIGHTS ---------- */
-if(!reduceMotion) {
-  const layer = $("twinkleLayer");
+/* =============================================
+   GOLDEN CONFETTI AFTER SCRATCH
+============================================= */
 
-  for(let i=0;i<18;i++) {
+function burstConfetti(count = 100) {
+  if (reducedMotion) return;
+
+  const colors = [
+    "#ffd678",
+    "#ff8caa",
+    "#d29aff",
+    "#ffffff",
+    "#7cecca"
+  ];
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement("span");
+    el.className = "confetti";
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.background = colors[
+      Math.floor(Math.random() * colors.length)
+    ];
+
+    el.style.setProperty(
+      "--falltime",
+      (2.6 + Math.random() * 3) + "s"
+    );
+
+    el.style.setProperty(
+      "--drift",
+      (Math.random() - .5) * 300 + "px"
+    );
+
+    el.style.setProperty(
+      "--spin",
+      Math.random() * 1000 + "deg"
+    );
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6500);
+  }
+}
+
+/* =============================================
+   FLOATING DIWALI LIGHTS
+============================================= */
+
+function createAmbientLights() {
+  if (reducedMotion) return;
+
+  const layer = $("ambient");
+
+  for (let i = 0; i < 35; i++) {
     const dot = document.createElement("span");
-    dot.className = "twinkle";
-    dot.style.left = Math.random()*100+"%";
-    dot.style.top = Math.random()*90+"%";
-    dot.style.setProperty("--speed",
-      (1.5+Math.random()*2)+"s");
-    dot.style.setProperty("--delay",
-      Math.random()*3+"s");
+
+    dot.style.left = Math.random() * 100 + "%";
+    dot.style.top = Math.random() * 100 + "%";
+
+    dot.style.setProperty(
+      "--time",
+      (3 + Math.random() * 5) + "s"
+    );
+
+    dot.style.setProperty(
+      "--delay",
+      Math.random() * 6 + "s"
+    );
+
     layer.appendChild(dot);
   }
 }
 
-/* ---------- RESTORE AFTER REFRESH ---------- */
-async function restoreSession() {
-  const s = readSession();
-  if(!s || !s.requestId || !s.receipt) return;
+/* =============================================
+   RESTORE PREVIOUS ASSIGNED CARD
+============================================= */
 
-  activeSession = s;
-  $("customerName").value = s.customerName || "";
-  $("mobile").value = s.mobile || "";
-  $("city").value = s.city || "";
-  $("dealerInput").value = s.dealerName || "";
-  updateProof();
+async function restoreSession() {
+  const old = readSession();
+  if (!old || !old.requestId || !old.receipt) return;
+
+  session = old;
+
+  $("customerName").value = old.customerName || "";
+  $("mobile").value = old.mobile || "";
+  $("city").value = old.city || "";
+  $("dealerInput").value = old.dealerName || "";
+
+  updateDealerProof();
 
   try {
-    const result = await apiGet("status",{
-      requestId:s.requestId,
-      receipt:s.receipt
+    const result = await apiGet("status", {
+      requestId: old.requestId,
+      receipt: old.receipt
     });
 
-    if(result.ok) displayScratch(result);
-    else if(result.code === "PENDING") {
-      notice(
-        "A previous request is pending. " +
-        "Enter your dealer verification detail to retry."
-      );
-    } else {
-      clearSession();
+    if (result.ok) {
+      displayScratch(result);
+    } else if (result.code !== "PENDING") {
+      removeSession();
     }
-  } catch(e) {
-    // Customer can retry using the same form.
+  } catch (_) {
+    // Customer can retry with their original form details.
   }
 }
 
-(async function init() {
+/* =============================================
+   INITIALIZE WEBSITE
+============================================= */
+
+async function initialize() {
+  createAmbientLights();
   await loadDealers();
   await restoreSession();
-})();
+}
+
+initialize();
 </script>
 </body>
 </html>
