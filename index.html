@@ -4,655 +4,619 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#180c2b">
+<meta name="theme-color" content="#420d47">
 <title>Diwali Dhamaka | Scratch & Win</title>
 
 <style>
-:root {
-  --night:#100a20;
-  --purple:#2c1649;
-  --gold:#ffd275;
-  --pink:#eeb3df;
-  --white:#fff9ee;
+:root{
+  --gold:#ffdc85;
+  --cream:#fff7e7;
+  --pink:#f59dc3;
+  --purple:#351342;
+  --dark:#170c26;
 }
-* {box-sizing:border-box;}
-html {scroll-behavior:smooth;}
-body {
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
   margin:0;
+  color:var(--cream);
+  background:
+    radial-gradient(ellipse at 50% 20%,#5a245a 0%,transparent 60%),
+    #170c26;
   font-family:Arial,Helvetica,sans-serif;
-  background:#100b21;
-  color:var(--white);
   overflow-x:hidden;
 }
-[hidden] {display:none!important;}
-button,input {font:inherit;}
-button {cursor:pointer;}
-button:disabled {cursor:wait;opacity:.68;}
+[hidden]{display:none!important}
+button,input{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:wait;opacity:.65}
 
-/* Festive ambient background */
-body:before {
-  content:"";
+/* Festive background */
+
+.ambient{
   position:fixed;
   inset:0;
-  z-index:-1;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 12% 20%,#5a245343,transparent 38%),
-    radial-gradient(circle at 85% 70%,#a15d2928,transparent 42%),
-    linear-gradient(#100a20,#1a1032);
-}
-.ambient {
-  position:fixed;
   z-index:0;
-  inset:0;
-  pointer-events:none;
   overflow:hidden;
+  pointer-events:none;
 }
-.ambient span {
+.ambient span{
   position:absolute;
-  width:4px;
-  height:4px;
+  width:4px;height:4px;
   border-radius:50%;
-  background:#ffdd9b;
-  box-shadow:0 0 12px #ffc96a;
-  animation:starFloat var(--time) linear infinite;
-  animation-delay:var(--delay);
+  background:#ffe4a1;
+  box-shadow:0 0 12px 3px #fca65e;
   opacity:0;
+  animation:floatSpark var(--duration) linear infinite;
+  animation-delay:var(--delay);
 }
-@keyframes starFloat {
-  0% {transform:translateY(30px) scale(.4);opacity:0;}
-  20%,75% {opacity:.85;}
-  100% {transform:translateY(-130px) scale(1.4);opacity:0;}
+@keyframes floatSpark{
+  0%{opacity:0;transform:translateY(50px) scale(.4)}
+  30%{opacity:.9}
+  75%{opacity:.7}
+  100%{opacity:0;transform:translateY(-160px) scale(1.2)}
 }
 
 /* Hero */
-.hero {
+
+.hero{
   position:relative;
+  isolation:isolate;
   overflow:hidden;
+  padding:76px 14px 30px;
   text-align:center;
-  padding:65px 18px 52px;
-  min-height:390px;
   background:
-    radial-gradient(ellipse at 50% 70%,#6c3275b8,transparent 64%),
-    linear-gradient(135deg,#1a0b36,#42205b,#160c31);
-  border-bottom:2px solid #d79b4d;
+    radial-gradient(circle at 50% 64%,#b93c7880,transparent 60%),
+    radial-gradient(circle at 20% 20%,#7a3068,transparent 48%),
+    linear-gradient(135deg,#4a164e,#691c61,#2a113e);
+  border-bottom:2px solid #ecaf53;
 }
-.hero:before {
+.hero:after{
   content:"";
   position:absolute;
   inset:12px;
-  border:1px solid #f8c76632;
-  border-radius:26px;
+  z-index:-1;
+  border:1px solid #ffdb8740;
+  border-radius:24px;
   pointer-events:none;
 }
-.hero-content {position:relative;z-index:2;}
-.eyebrow {
-  color:var(--gold);
-  font-size:12px;
+.hero-content{position:relative;z-index:2}
+.eyebrow{
+  font-size:11px;
   letter-spacing:4px;
+  color:#ffe4a3;
   font-weight:800;
 }
-.hero h1 {
-  margin:14px 0 5px;
-  font-size:clamp(35px,8vw,74px);
-  line-height:1.1;
-  color:#ffe3a0;
-  text-shadow:0 0 30px #fdbd6477;
-  animation:titleGlow 3s ease-in-out infinite alternate;
+.hero h1{
+  color:#ffdf98;
+  font-size:clamp(37px,8vw,76px);
+  line-height:1.08;
+  margin:14px 0 6px;
+  text-shadow:0 0 30px #ffc360aa;
+  animation:headingGlow 3s ease-in-out infinite alternate;
 }
-.hero h2 {
-  margin:10px 0;
-  font-size:clamp(22px,5vw,35px);
-  color:#fff3df;
+.hero h2{
+  font-size:clamp(22px,5vw,34px);
+  margin:9px 0;
+  color:white;
 }
-.hero p {
-  color:#e6d8ee;
+.hero p{
   font-size:14px;
+  color:#ffe0ee;
   line-height:1.8;
 }
-@keyframes titleGlow {
-  from {text-shadow:0 0 12px #e9a24d55;}
-  to {text-shadow:0 0 38px #ffca73bb;}
+@keyframes headingGlow{
+  to{text-shadow:0 0 50px #ffca78}
 }
 
-/* Diwali hanging decoration */
-.toran {
+/* Golden decorative border */
+
+.gold-chain{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:15px;
+  border-bottom:2px solid #e6a748;
+  background:repeating-linear-gradient(
+    90deg,#f8b752 0 8px,#793052 8px 15px
+  );
+}
+
+/* Hanging lanterns */
+
+.lantern{
   position:absolute;
   top:0;
-  left:0;
-  width:100%;
-  height:50px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-around;
+  z-index:3;
+  width:52px;
+  height:136px;
+  transform-origin:top center;
+  animation:lanternSway 4s ease-in-out infinite alternate;
   pointer-events:none;
 }
-.toran span {
-  position:relative;
-  width:2px;
-  height:25px;
-  background:#d9a855;
-}
-.toran span:after {
+.lantern.left{left:6%}
+.lantern.right{right:6%;animation-delay:1s}
+.lantern:before{
   content:"";
   position:absolute;
-  top:18px;
-  left:-9px;
-  width:20px;
-  height:23px;
-  border-radius:55% 55% 60% 60%;
-  background:linear-gradient(135deg,#ffcd61,#c96327);
-  transform:rotate(35deg);
-  box-shadow:0 0 12px #ffa43f55;
-  animation:sway 3s ease-in-out infinite alternate;
-  transform-origin:top center;
+  top:0;left:25px;
+  height:57px;width:2px;
+  background:#ffd27c;
 }
-.toran span:nth-child(even):after {
-  background:linear-gradient(135deg,#e89b54,#9c3465);
-  animation-delay:1s;
+.lantern-body{
+  position:absolute;
+  top:53px;left:5px;
+  width:43px;height:58px;
+  clip-path:polygon(
+    50% 0,85% 16%,100% 50%,
+    85% 85%,50% 100%,15% 85%,
+    0 50%,15% 16%
+  );
+  background:
+    linear-gradient(90deg,#ffdf7c,#db5a85,#ffcc6c);
+  box-shadow:0 0 30px #ffbc6b;
+  animation:lanternLight 1.9s infinite alternate;
 }
-@keyframes sway {
-  to {transform:rotate(-24deg);}
+.lantern-body:after{
+  content:"✦";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#fff7d2;
+  font-size:25px;
+}
+.lantern-tail{
+  position:absolute;
+  top:110px;left:25px;
+  width:2px;height:20px;
+  background:#e7a74c;
+}
+@keyframes lanternSway{
+  to{transform:rotate(7deg)}
+}
+@keyframes lanternLight{
+  to{filter:brightness(1.4) drop-shadow(0 0 12px #ffcc66)}
 }
 
-/* Live burning diyas */
-.diya-row {
-  display:flex;
-  justify-content:center;
-  gap:clamp(12px,4vw,35px);
-  margin:34px auto 6px;
-}
-.diya {
+/* Rangoli and premium diya artwork */
+
+.festival-art{
   position:relative;
-  display:block;
-  width:68px;
-  height:75px;
-  flex:none;
-  animation:diyaFloat 3.5s ease-in-out infinite;
-  animation-delay:var(--delay,0s);
+  width:min(100%,720px);
+  height:300px;
+  margin:15px auto 0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 }
-.diya-halo {
+.rangoli{
   position:absolute;
-  left:10px;
+  width:280px;
+  height:280px;
+  left:50%;
   top:0;
-  width:50px;
-  height:57px;
-  border-radius:50%;
-  background:radial-gradient(circle,#ffc45165,transparent 70%);
-  filter:blur(5px);
-  animation:haloPulse 1.4s infinite alternate;
+  transform:translateX(-50%);
+  opacity:.7;
+  animation:rangoliRotate 55s linear infinite;
+  filter:drop-shadow(0 0 18px #ff9dd0);
 }
-.diya-wick {
-  position:absolute;
-  z-index:2;
-  top:32px;
-  left:33px;
-  width:3px;
-  height:15px;
-  background:#532814;
-  transform:rotate(7deg);
+@keyframes rangoliRotate{
+  to{transform:translateX(-50%) rotate(360deg)}
 }
-.diya-flame {
+.diya-line{
   position:absolute;
   z-index:3;
-  left:26px;
-  top:3px;
-  width:19px;
-  height:37px;
-  border-radius:78% 2% 73% 65%;
-  background:linear-gradient(25deg,#ff6a00 5%,#ffcf38 55%,#fffbc9);
-  transform:rotate(43deg);
-  transform-origin:bottom center;
-  filter:drop-shadow(0 0 9px #ffb12e);
-  animation:flameFlicker .95s ease-in-out infinite alternate;
+  left:0;right:0;bottom:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:clamp(0px,2vw,24px);
 }
-.diya-flame:after {
-  content:"";
-  position:absolute;
-  left:6px;
-  bottom:5px;
-  width:8px;
-  height:17px;
-  border-radius:70% 0 70% 60%;
-  background:#fff8d6;
+.svg-diya{
+  width:185px;
+  max-width:29%;
+  height:auto;
+  overflow:visible;
+  filter:drop-shadow(0 15px 16px #15041c66);
+  animation:diyaFloat 4s ease-in-out infinite;
 }
-.diya-bowl {
-  position:absolute;
-  z-index:4;
-  bottom:6px;
-  left:2px;
-  width:64px;
-  height:27px;
-  border-radius:5px 5px 42px 42px;
-  background:linear-gradient(180deg,#ffe29a,#e88428 50%,#7d2e24);
-  border-bottom:3px solid #ffce66;
-  box-shadow:0 10px 25px #f5a74448;
+.svg-diya.center{
+  width:265px;
+  max-width:42%;
+  animation-delay:.4s;
 }
-.diya-bowl:before {
-  content:"";
+.svg-diya.right{animation-delay:.8s}
+.svg-flame{
+  transform-origin:50% 61%;
+  animation:flameDance .9s ease-in-out infinite alternate;
+}
+.svg-diya.right .svg-flame{animation-delay:.3s}
+.svg-diya.center .svg-flame{animation-delay:.5s}
+@keyframes diyaFloat{
+  50%{transform:translateY(-8px)}
+}
+@keyframes flameDance{
+  0%{transform:rotate(-5deg) scale(.93,1.02)}
+  50%{transform:rotate(5deg) scale(.84,1.16)}
+  100%{transform:rotate(-2deg) scale(1.03,.96)}
+}
+.flame-halo{
+  animation:haloGlow 1.3s infinite alternate;
+  transform-origin:center;
+}
+@keyframes haloGlow{
+  to{opacity:.6;transform:scale(1.13)}
+}
+.floor-glow{
   position:absolute;
-  top:-6px;
-  left:0;
-  width:64px;
-  height:11px;
+  z-index:1;
+  bottom:0;
+  width:85%;
+  height:55px;
   border-radius:50%;
-  background:linear-gradient(#ffebbb,#b6572f);
-  border:2px solid #ffd882;
-}
-.diya-bowl:after {
-  content:"✦ ✦ ✦";
-  position:absolute;
-  left:10px;
-  top:10px;
-  font-size:11px;
-  color:#ffe5a8;
-}
-@keyframes flameFlicker {
-  0% {transform:rotate(39deg) scale(.94,1.05);}
-  50% {transform:rotate(49deg) scale(.86,1.2);}
-  100% {transform:rotate(41deg) scale(1.04,.92);}
-}
-@keyframes haloPulse {
-  to {opacity:.6;transform:scale(1.3);}
-}
-@keyframes diyaFloat {
-  50% {transform:translateY(-7px);}
+  background:#ffb45070;
+  filter:blur(27px);
 }
 
-/* Layout */
-main {
+/* Festive transition — replaces old 3 step boxes */
+
+.festival-divider{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin:28px auto 30px;
+  color:var(--gold);
+}
+.festival-divider .line{
+  height:2px;
+  width:clamp(40px,18vw,150px);
+  background:linear-gradient(90deg,transparent,#ffce7b);
+}
+.festival-divider .line:last-child{
+  transform:rotate(180deg);
+}
+.festival-divider .gem{
+  font-size:27px;
+  animation:gemGlow 2s infinite alternate;
+}
+@keyframes gemGlow{
+  to{transform:scale(1.23) rotate(20deg);
+     filter:drop-shadow(0 0 12px #ffd070)}
+}
+
+/* Main */
+
+main{
   position:relative;
   z-index:1;
-  max-width:770px;
-  margin:0 auto;
-  padding:30px 16px 90px;
+  max-width:750px;
+  margin:auto;
+  padding:5px 16px 85px;
 }
-.steps {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:11px;
-  margin-bottom:27px;
-}
-.step {
-  border:1px solid #755083;
-  background:#2a1b42;
-  border-radius:16px;
-  padding:16px 8px;
-  text-align:center;
-  color:#eee1ff;
-  font-size:12px;
-}
-.step span {
-  display:block;
-  font-size:26px;
-  margin-bottom:9px;
-  animation:floatIcon 4s ease-in-out infinite;
-}
-.step:nth-child(2) span {animation-delay:.7s;}
-.step:nth-child(3) span {animation-delay:1.4s;}
-@keyframes floatIcon {
-  50% {transform:translateY(-5px);}
-}
-
-.panel {
-  position:relative;
-  border:1px solid #9a6385;
-  border-radius:26px;
+.panel{
+  background:linear-gradient(155deg,#3d194f,#231236);
+  border:1px solid #9c628f;
+  border-radius:25px;
   padding:35px;
-  background:linear-gradient(155deg,#351d51,#201335);
-  box-shadow:
-    0 20px 65px #0008,
-    0 0 45px #e5a44a15;
-  overflow:visible;
+  box-shadow:0 20px 65px #0006,0 0 35px #d57b7530;
 }
-.panel:after {
-  content:"";
-  position:absolute;
-  inset:6px;
-  border-radius:21px;
-  border:1px solid #f2c56519;
-  pointer-events:none;
-}
-.heading {
-  margin:3px 0 10px;
-  font-size:clamp(23px,5vw,30px);
+.heading{
+  margin:0 0 10px;
+  font-size:clamp(23px,5vw,29px);
   text-align:center;
-  color:#ffda86;
-  text-shadow:0 0 16px #ffc76c38;
+  color:#ffdb91;
 }
-.heading-rule {
-  height:3px;
-  width:82px;
-  border-radius:10px;
-  margin:0 auto 17px;
-  background:linear-gradient(90deg,transparent,#ffdf84,transparent);
-}
-.subtitle {
-  color:#d7c4e5;
+.subtitle{
   text-align:center;
+  color:#e5cce6;
+  line-height:1.7;
   font-size:13px;
-  line-height:1.75;
   margin:0 0 28px;
 }
-
-/* Animated form fields */
-.field {
+.field{
   margin:19px 0;
-  position:relative;
-  transition:transform .23s;
+  transition:transform .2s;
 }
-.field:focus-within {transform:translateY(-3px);}
-.field label {
+.field:focus-within{transform:translateY(-3px)}
+.field label{
   display:block;
-  font-weight:700;
-  color:#f2dffb;
-  font-size:13px;
   margin-bottom:9px;
+  font-weight:700;
+  font-size:13px;
+  color:#ffedf8;
 }
-.field input {
-  display:block;
-  height:53px;
+.field input{
   width:100%;
-  border:1px solid #77548c;
-  background:#130d2a;
-  color:white;
-  border-radius:13px;
-  outline:none;
+  height:53px;
   padding:0 15px;
   font-size:15px;
+  color:white;
+  background:#1b102c;
+  border:1px solid #865a93;
+  border-radius:13px;
+  outline:none;
   transition:border-color .2s,box-shadow .2s;
 }
-.field input::placeholder {color:#9b89b1;}
-.field input:focus {
-  border-color:#ffcb72;
-  box-shadow:0 0 0 3px #ffc16c1b,0 0 20px #ffbf6a23;
+.field input::placeholder{color:#a58eaf}
+.field input:focus{
+  border-color:#ffd177;
+  box-shadow:0 0 0 3px #ffc97a20,0 0 20px #ffcf7730;
 }
-.hint {
+.hint{
+  color:#c6b0cf;
   font-size:12px;
   line-height:1.7;
-  color:#bba9d0;
-  margin:10px 0 0;
-}
-.field-spark {
-  position:fixed;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#ffe397;
-  box-shadow:0 0 12px #ffc354;
-  pointer-events:none;
-  z-index:150;
-  animation:sparkOut .7s ease-out forwards;
-}
-@keyframes sparkOut {
-  to {
-    transform:translate(var(--sx),var(--sy)) scale(.1);
-    opacity:0;
-  }
 }
 
-/* Dealer dropdown */
-.combo {position:relative;}
-.combo-input {position:relative;}
-.combo-input input {padding-right:55px;}
-.combo-btn {
+/* Dealer search */
+
+.combo{position:relative}
+.combo-input{position:relative}
+.combo-input input{padding-right:55px}
+.combo-btn{
   position:absolute;
-  top:6px;
-  right:6px;
-  width:42px;
-  height:41px;
-  color:#ffe08d;
-  font-size:23px;
-  border:0;
-  border-radius:10px;
-  background:#513368;
+  top:6px;right:6px;
+  height:41px;width:42px;
+  color:#ffe5a0;
+  background:#5b346c;
+  border:0;border-radius:9px;
+  font-size:21px;
 }
-.combo-btn:hover {background:#684482;}
-.options {
+.options{
   position:absolute;
   top:calc(100% + 6px);
-  left:0;
-  width:100%;
-  max-height:250px;
-  overflow-y:auto;
-  border:1px solid #b789ae;
-  border-radius:12px;
+  left:0;right:0;
   z-index:20;
-  background:#281940;
-  box-shadow:0 15px 32px #0008;
+  max-height:240px;
+  overflow:auto;
   padding:5px;
+  background:#301a47;
+  border:1px solid #b38bab;
+  border-radius:12px;
+  box-shadow:0 15px 30px #0008;
 }
-.option {
+.option{
   display:block;
   width:100%;
-  color:#fff4e9;
-  padding:12px;
-  border:0;
   background:transparent;
+  color:white;
+  padding:12px;
   text-align:left;
-  font-size:14px;
+  border:0;
   border-radius:8px;
 }
-.option:hover,.option:focus {
-  background:#5f3d75;
-}
-.no-option {
-  padding:13px;
-  color:#d8c8e4;
+.option:hover,.option:focus{background:#604077}
+.no-option{
+  padding:12px;
   font-size:13px;
+  color:#e1cae6;
 }
 
 /* Checkboxes */
-.check-row {
+
+.check-row{
   display:flex;
   align-items:flex-start;
   gap:10px;
-  margin:12px 0 0;
+  margin:13px 0 0;
 }
-.check-row input {
-  width:18px;
-  height:18px;
-  flex-shrink:0;
-  accent-color:#eebd62;
+.check-row input{
+  width:18px;height:18px;
+  accent-color:#ffcd70;
+  flex:none;
 }
-.check-row label {
-  font-size:12px;
-  font-weight:normal;
-  color:#dfcfe8;
-  line-height:1.7;
+.check-row label{
   margin:0;
+  color:#ddc9e4;
+  font-size:12px;
+  line-height:1.7;
 }
-.consent {margin:25px 0;}
+.consent{margin:25px 0}
 
 /* Submit */
-.submit-btn {
+
+.submit-btn{
   width:100%;
-  min-height:57px;
+  min-height:56px;
   border:none;
   border-radius:14px;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   gap:12px;
-  color:#41250e;
-  font-size:16px;
+  background:linear-gradient(110deg,#e7a448,#ffe3a0,#f0aa42);
+  color:#44250e;
   font-weight:800;
-  background:linear-gradient(110deg,#e99c38,#ffe3a0,#efa83d);
-  box-shadow:0 10px 30px #f4b04a46;
+  box-shadow:0 10px 30px #efa74855;
   transition:transform .2s,box-shadow .2s;
 }
-.submit-btn:hover {
+.submit-btn:hover{
   transform:translateY(-2px);
-  box-shadow:0 13px 35px #f4b04a65;
+  box-shadow:0 15px 36px #ffc06b66;
 }
-.submit-btn:active {transform:scale(.98);}
-.loader {
-  width:19px;
-  height:19px;
+.submit-btn:active{transform:scale(.98)}
+.loader{
+  height:20px;width:20px;
+  border:3px solid #81502644;
+  border-top-color:#7a421c;
   border-radius:50%;
-  border:3px solid #8a552d55;
-  border-top-color:#7e3e1d;
   animation:spin .7s linear infinite;
 }
-@keyframes spin {to {transform:rotate(360deg);}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* Errors only — no success notification boxes */
-.error-box {
-  margin-top:18px;
-  padding:13px 15px;
-  background:#4a1d37;
-  border:1px solid #e47d8e;
+/* Input sparkles */
+
+.input-spark{
+  position:fixed;
+  z-index:100;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#ffe3a3;
+  box-shadow:0 0 12px #ffc76e;
+  pointer-events:none;
+  animation:sparkFly .75s ease-out forwards;
+}
+@keyframes sparkFly{
+  to{
+    opacity:0;
+    transform:translate(var(--dx),var(--dy)) scale(.1);
+  }
+}
+
+/* Errors */
+
+.error-box{
+  background:#4c2038;
+  color:#ffe0e4;
+  border:1px solid #e48d99;
+  padding:15px;
   border-radius:12px;
-  color:#ffe2e7;
-  line-height:1.6;
-  font-size:13px;
   text-align:center;
-  animation:errorAppear .28s ease-out;
+  font-size:13px;
+  line-height:1.7;
+  margin-top:18px;
 }
-@keyframes errorAppear {
-  from {opacity:0;transform:translateY(8px);}
-  to {opacity:1;transform:translateY(0);}
-}
-.retry-btn {
+.retry-btn{
   margin-top:10px;
-  border:1px solid #ffbcaa;
-  background:#783c54;
-  color:white;
-  padding:10px 18px;
+  padding:11px 20px;
+  border:1px solid #ffd0af;
+  background:#833c5d;
   border-radius:9px;
+  color:white;
 }
 
-/* Scratch card only — no extra result panel */
-.scratch-view {
+/* Scratch card */
+
+.scratch-view{
   text-align:center;
-  animation:cardEnter .7s cubic-bezier(.2,1.3,.4,1);
+  animation:cardEnter .65s cubic-bezier(.2,1.4,.4,1);
 }
-@keyframes cardEnter {
-  from {opacity:0;transform:scale(.85) translateY(20px);}
-  to {opacity:1;transform:scale(1) translateY(0);}
+@keyframes cardEnter{
+  from{opacity:0;transform:translateY(22px) scale(.88)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
-.scratch-card {
+.scratch-card{
   position:relative;
-  margin:25px auto 12px;
-  max-width:440px;
+  max-width:430px;
+  margin:25px auto 10px;
   overflow:hidden;
-  background:radial-gradient(circle at 50% 35%,#fffbe0,#ffe09b);
-  border:6px solid #ffd176;
   border-radius:22px;
-  box-shadow:0 0 40px #ffc15f4b;
+  border:6px solid #ffcf77;
+  background:radial-gradient(circle at 50% 30%,#fffbe1,#ffdea0);
+  box-shadow:0 0 38px #fbbd5777;
 }
-.prize {
+.prize{
   height:220px;
-  padding:18px;
+  padding:16px;
   display:flex;
-  align-items:center;
   flex-direction:column;
   justify-content:center;
+  align-items:center;
 }
-.prize-heading {
-  color:#805221;
-  font-size:20px;
+.prize-heading{
   font-weight:800;
+  font-size:20px;
+  color:#845322;
 }
-.prize-amount {
-  color:#08794a;
+.prize-amount{
   font-size:clamp(37px,9vw,52px);
   font-weight:900;
-  margin:15px 0 10px;
+  color:#0b804b;
+  margin:14px 0 9px;
 }
-.prize-code {
-  color:#78562b;
+.prize-code{
+  color:#765227;
   font-size:13px;
   font-weight:700;
   overflow-wrap:anywhere;
 }
-#scratchCanvas {
+#scratchCanvas{
   position:absolute;
   inset:0;
   width:100%;
   height:220px;
-  cursor:crosshair;
   touch-action:none;
+  cursor:crosshair;
 }
-.scratch-card.revealed {
-  animation:winnerGlow 1.3s ease-in-out infinite alternate;
+.scratch-card.revealed{
+  animation:rewardGlow 1.5s infinite alternate;
 }
-@keyframes winnerGlow {
-  to {box-shadow:0 0 58px #ffd77a99;}
+@keyframes rewardGlow{
+  to{box-shadow:0 0 65px #ffd77dab}
 }
 
-/* Full screen rockets / fireworks */
-#celebrationCanvas {
+/* Fireworks and confetti */
+
+#fireworksCanvas{
   position:fixed;
-  z-index:100;
   inset:0;
-  width:100%;
-  height:100%;
+  z-index:100;
   pointer-events:none;
+  width:100%;height:100%;
 }
-
-/* Glitter confetti */
-.confetti {
+.confetti{
   position:fixed;
   z-index:105;
-  width:9px;
-  height:15px;
   top:-25px;
+  width:9px;height:14px;
   pointer-events:none;
-  animation:confettiFall var(--falltime) linear forwards;
+  animation:confettiFall var(--time) linear forwards;
 }
-@keyframes confettiFall {
-  to {
+@keyframes confettiFall{
+  to{
+    opacity:0;
     transform:translate(var(--drift),110vh)
               rotate(var(--spin));
-    opacity:0;
   }
 }
 
-/* Hidden poster area retained for future */
-.poster-zone[hidden] {display:none!important;}
-.poster-zone img {
+/* Poster area retained for future */
+.poster-zone img{
   display:block;
   width:100%;
   height:auto;
-  margin-bottom:22px;
   border-radius:15px;
+  margin-bottom:20px;
 }
 
-.footer {
-  position:relative;
+/* Minimal footer — no budget text */
+
+.footer{
   text-align:center;
   padding:30px 15px 45px;
-  font-size:12px;
-  line-height:1.9;
-  background:#110a20;
-  color:#baa9cc;
+  background:#160c23;
+  color:#ffd79f;
+  font-size:13px;
+  letter-spacing:.4px;
 }
 
-.sr-only {
+.sr-only{
   position:absolute;
-  width:1px;
-  height:1px;
+  width:1px;height:1px;
   overflow:hidden;
   clip-path:inset(50%);
-  white-space:nowrap;
 }
 
-@media(max-width:550px) {
-  .hero {min-height:340px;padding:49px 15px 35px;}
-  .diya-row {gap:10px;margin-top:25px;}
-  .diya {transform:scale(.82);margin:0 -4px;}
-  .panel {padding:25px 17px;}
-  .step {padding:14px 5px;font-size:11px;}
-  .heading {font-size:23px;}
-  .prize {height:200px;}
-  #scratchCanvas {height:200px;}
+@media(max-width:550px){
+  .hero{padding:60px 12px 15px}
+  .lantern{transform:scale(.75)}
+  .lantern.left{left:0}
+  .lantern.right{right:0}
+  .festival-art{height:225px}
+  .rangoli{width:205px;height:205px}
+  .svg-diya.center{max-width:44%}
+  .svg-diya{max-width:28%}
+  .panel{padding:25px 17px}
+  .prize{height:195px}
+  #scratchCanvas{height:195px}
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*:before,*:after {
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
     animation-duration:.01ms!important;
     transition-duration:.01ms!important;
-    scroll-behavior:auto!important;
   }
 }
 </style>
@@ -661,54 +625,210 @@ main {
 <body>
 
 <div class="ambient" id="ambient" aria-hidden="true"></div>
-<canvas id="celebrationCanvas" aria-hidden="true"></canvas>
+<canvas id="fireworksCanvas" aria-hidden="true"></canvas>
 
-<header class="hero">
-  <div class="toran" aria-hidden="true">
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
+<!-- ORIGINAL DECORATIVE SVG ARTWORK -->
+<svg width="0" height="0"
+     style="position:absolute;overflow:hidden"
+     xmlns="http://www.w3.org/2000/svg">
+<defs>
+
+  <linearGradient id="diyaGold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ffe9a2"/>
+    <stop offset=".38" stop-color="#fba93a"/>
+    <stop offset=".75" stop-color="#b94b37"/>
+    <stop offset="1" stop-color="#652b72"/>
+  </linearGradient>
+
+  <linearGradient id="diyaLip" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff4ca"/>
+    <stop offset=".6" stop-color="#eaa13f"/>
+    <stop offset="1" stop-color="#a3414a"/>
+  </linearGradient>
+
+  <linearGradient id="diyaBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#55cde9"/>
+    <stop offset="1" stop-color="#293c99"/>
+  </linearGradient>
+
+  <radialGradient id="flameGlow">
+    <stop offset="0" stop-color="#ffe8a0" stop-opacity=".85"/>
+    <stop offset="1" stop-color="#ffa02d" stop-opacity="0"/>
+  </radialGradient>
+
+  <linearGradient id="flameFill" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#ff5b11"/>
+    <stop offset=".5" stop-color="#ffba25"/>
+    <stop offset="1" stop-color="#fff5c4"/>
+  </linearGradient>
+
+  <symbol id="diyaShell" viewBox="0 0 220 160">
+    <path d="M22 97 Q35 139 110 148 Q185 139 198 97
+             Q110 119 22 97Z"
+          fill="url(#diyaGold)"
+          stroke="#ffdb8b" stroke-width="4"/>
+
+    <path d="M32 111 Q110 163 188 111"
+          fill="none" stroke="#62246c"
+          stroke-width="13"/>
+
+    <path d="M42 115 Q110 155 178 115"
+          fill="none" stroke="url(#diyaBlue)"
+          stroke-width="9"/>
+
+    <path d="M42 125 Q110 160 178 125"
+          fill="none" stroke="#ffd575"
+          stroke-width="3"
+          stroke-dasharray="5 7"/>
+
+    <ellipse cx="110" cy="97" rx="88" ry="20"
+             fill="url(#diyaLip)"
+             stroke="#ffe2a0" stroke-width="4"/>
+
+    <ellipse cx="110" cy="95" rx="72" ry="10"
+             fill="#9c4d38" opacity=".85"/>
+
+    <g fill="#fff4b8" stroke="#efb965" stroke-width="1">
+      <path d="M57 117 l9 -10 l9 10 l-9 10Z"/>
+      <path d="M82 129 l9 -10 l9 10 l-9 10Z"/>
+      <path d="M109 133 l9 -10 l9 10 l-9 10Z"/>
+      <path d="M136 127 l9 -10 l9 10 l-9 10Z"/>
+      <path d="M160 115 l9 -10 l9 10 l-9 10Z"/>
+    </g>
+
+    <g fill="#48d5ef">
+      <circle cx="66" cy="117" r="3"/>
+      <circle cx="91" cy="129" r="3"/>
+      <circle cx="118" cy="133" r="3"/>
+      <circle cx="145" cy="127" r="3"/>
+      <circle cx="169" cy="115" r="3"/>
+    </g>
+  </symbol>
+
+</defs>
+</svg>
+
+<header class="hero" id="home">
+
+  <div class="gold-chain"></div>
+
+  <div class="lantern left" aria-hidden="true">
+    <span class="lantern-body"></span>
+    <span class="lantern-tail"></span>
+  </div>
+
+  <div class="lantern right" aria-hidden="true">
+    <span class="lantern-body"></span>
+    <span class="lantern-tail"></span>
   </div>
 
   <div class="hero-content">
     <div class="eyebrow">✦ FESTIVAL OF LIGHTS ✦</div>
+
     <h1>DIWALI DHAMAKA</h1>
+
     <h2>✨ Scratch & Win ✨</h2>
+
     <p>
-      Celebrate the festival with a surprise gift.<br>
-      Register, verify your dealer and reveal your reward!
+      Celebrate the festival with a special surprise!<br>
+      Register and unlock your lucky voucher.
     </p>
 
-    <div class="diya-row" aria-hidden="true">
-      <div class="diya" style="--delay:0s">
-        <span class="diya-halo"></span>
-        <span class="diya-wick"></span>
-        <span class="diya-flame"></span>
-        <span class="diya-bowl"></span>
-      </div>
-      <div class="diya" style="--delay:.5s">
-        <span class="diya-halo"></span>
-        <span class="diya-wick"></span>
-        <span class="diya-flame"></span>
-        <span class="diya-bowl"></span>
-      </div>
-      <div class="diya" style="--delay:1s">
-        <span class="diya-halo"></span>
-        <span class="diya-wick"></span>
-        <span class="diya-flame"></span>
-        <span class="diya-bowl"></span>
-      </div>
-      <div class="diya" style="--delay:1.5s">
-        <span class="diya-halo"></span>
-        <span class="diya-wick"></span>
-        <span class="diya-flame"></span>
-        <span class="diya-bowl"></span>
-      </div>
-      <div class="diya" style="--delay:2s">
-        <span class="diya-halo"></span>
-        <span class="diya-wick"></span>
-        <span class="diya-flame"></span>
-        <span class="diya-bowl"></span>
+    <div class="festival-art" aria-hidden="true">
+
+      <!-- Rotating rangoli backdrop -->
+      <svg class="rangoli" viewBox="0 0 300 300">
+        <defs>
+          <path id="petal"
+            d="M150 145 Q95 84 150 16 Q205 84 150 145Z"
+            fill="#ffaecc" stroke="#ffdc80" stroke-width="2"/>
+        </defs>
+
+        <circle cx="150" cy="150" r="138"
+                fill="none" stroke="#ffdb88"
+                stroke-width="3" stroke-dasharray="3 10"/>
+
+        <g opacity=".85">
+          <use href="#petal"/>
+          <use href="#petal" transform="rotate(45 150 150)"/>
+          <use href="#petal" transform="rotate(90 150 150)"/>
+          <use href="#petal" transform="rotate(135 150 150)"/>
+          <use href="#petal" transform="rotate(180 150 150)"/>
+          <use href="#petal" transform="rotate(225 150 150)"/>
+          <use href="#petal" transform="rotate(270 150 150)"/>
+          <use href="#petal" transform="rotate(315 150 150)"/>
+        </g>
+
+        <circle cx="150" cy="150" r="59"
+                fill="#c54083" stroke="#ffe09c"
+                stroke-width="5"/>
+
+        <circle cx="150" cy="150" r="43"
+                fill="none" stroke="#fff1c6"
+                stroke-width="4" stroke-dasharray="3 7"/>
+
+        <circle cx="150" cy="150" r="25"
+                fill="#ffe1a5"/>
+      </svg>
+
+      <div class="floor-glow"></div>
+
+      <div class="diya-line">
+
+        <!-- LEFT DIYA -->
+        <svg class="svg-diya left" viewBox="0 0 220 160">
+          <ellipse class="flame-halo"
+                   cx="110" cy="72" rx="55" ry="65"
+                   fill="url(#flameGlow)"/>
+
+          <g class="svg-flame">
+            <path d="M110 103 C77 76 96 51 116 18
+                     C108 54 148 71 131 93
+                     Q122 105 110 103Z"
+                  fill="url(#flameFill)"/>
+            <path d="M112 98 C103 85 110 65 119 55
+                     C116 77 129 86 120 96Z"
+                  fill="#fff9d7"/>
+          </g>
+          <use href="#diyaShell"/>
+        </svg>
+
+        <!-- LARGE CENTRAL DIYA -->
+        <svg class="svg-diya center" viewBox="0 0 220 160">
+          <ellipse class="flame-halo"
+                   cx="110" cy="72" rx="65" ry="73"
+                   fill="url(#flameGlow)"/>
+
+          <g class="svg-flame">
+            <path d="M110 103 C74 76 96 45 118 7
+                     C110 49 153 65 131 95
+                     Q121 106 110 103Z"
+                  fill="url(#flameFill)"/>
+            <path d="M111 99 C101 81 113 62 119 48
+                     C117 76 134 86 121 98Z"
+                  fill="#fff9d7"/>
+          </g>
+          <use href="#diyaShell"/>
+        </svg>
+
+        <!-- RIGHT DIYA -->
+        <svg class="svg-diya right" viewBox="0 0 220 160">
+          <ellipse class="flame-halo"
+                   cx="110" cy="72" rx="55" ry="65"
+                   fill="url(#flameGlow)"/>
+
+          <g class="svg-flame">
+            <path d="M110 103 C77 76 96 51 116 18
+                     C108 54 148 71 131 93
+                     Q122 105 110 103Z"
+                  fill="url(#flameFill)"/>
+            <path d="M112 98 C103 85 110 65 119 55
+                     C116 77 129 86 120 96Z"
+                  fill="#fff9d7"/>
+          </g>
+          <use href="#diyaShell"/>
+        </svg>
+
       </div>
     </div>
   </div>
@@ -716,25 +836,27 @@ main {
 
 <main>
 
-  <!-- POSTERS PRESERVED, CURRENTLY HIDDEN.
-       Remove hidden when you want to show posters.
-       Upload poster1.jpg and poster2.jpg to GitHub. -->
+  <!-- POSTERS SAVED BUT CURRENTLY HIDDEN -->
   <section class="poster-zone" id="posterZone" hidden>
-    <img src="poster1.jpg" alt="Offer poster 1">
-    <img src="poster2.jpg" alt="Offer poster 2">
+    <img src="poster1.jpg" alt="Poster 1">
+    <img src="poster2.jpg" alt="Poster 2">
+    <img src="poster3.jpg" alt="Poster 3">
   </section>
 
-  <div class="steps">
-    <div class="step"><span>📝</span>Fill Details</div>
-    <div class="step"><span>🏪</span>Verify Dealer</div>
-    <div class="step"><span>🎁</span>Scratch & Win</div>
+  <!-- DECORATIVE FESTIVE DIVIDER -->
+  <div class="festival-divider" aria-hidden="true">
+    <span class="line"></span>
+    <span class="gem">✺</span>
+    <span class="gem">✦</span>
+    <span class="gem">✺</span>
+    <span class="line"></span>
   </div>
 
   <section class="panel" id="registration">
 
     <div id="formView">
       <h2 class="heading">🪔 Lucky Draw Registration</h2>
-      <div class="heading-rule"></div>
+
       <p class="subtitle">
         Enter your details and verify your dealer
         to unlock a special Diwali scratch card.
@@ -745,19 +867,14 @@ main {
         <div class="field">
           <label for="customerName">Full Name</label>
           <input id="customerName"
-                 name="customerName"
+                 minlength="2" maxlength="80"
                  placeholder="Enter your full name"
-                 minlength="2"
-                 maxlength="80"
-                 autocomplete="name"
-                 required>
+                 autocomplete="name" required>
         </div>
 
         <div class="field">
           <label for="mobile">Mobile Number</label>
-          <input id="mobile"
-                 name="mobile"
-                 type="tel"
+          <input id="mobile" type="tel"
                  inputmode="numeric"
                  maxlength="10"
                  pattern="[6-9][0-9]{9}"
@@ -768,19 +885,18 @@ main {
         <div class="field">
           <label for="city">City</label>
           <input id="city"
-                 name="city"
-                 minlength="2"
-                 maxlength="70"
+                 minlength="2" maxlength="70"
                  placeholder="Enter your city"
                  required>
         </div>
 
         <div class="field">
           <label for="dealerInput">Select Dealer</label>
+
           <div class="combo" id="dealerCombo">
             <div class="combo-input">
+
               <input id="dealerInput"
-                     name="dealer"
                      placeholder="Search or select dealer"
                      autocomplete="off"
                      role="combobox"
@@ -788,18 +904,19 @@ main {
                      aria-controls="dealerList"
                      aria-autocomplete="list"
                      required>
+
               <button type="button"
-                      class="combo-btn"
                       id="dealerToggle"
-                      aria-label="Show dealer names">
-                ⌄
-              </button>
+                      class="combo-btn"
+                      aria-label="Show dealer names">⌄</button>
             </div>
+
             <div id="dealerList"
                  class="options"
                  role="listbox"
                  hidden></div>
           </div>
+
           <p class="hint">
             Start typing to search dealers from Google Sheets.
           </p>
@@ -809,6 +926,7 @@ main {
           <label for="dealerProof">
             Dealer Mobile Number OR Secret Code
           </label>
+
           <input id="dealerProof"
                  type="password"
                  maxlength="100"
@@ -819,32 +937,34 @@ main {
             <input id="showProof" type="checkbox">
             <label for="showProof">Show entered value</label>
           </div>
-          <p class="hint">
-            Either the dealer's registered mobile
-            number or their secret code is accepted.
-          </p>
         </div>
 
         <div class="check-row consent">
-          <input id="consent" type="checkbox" required>
+          <input id="consent"
+                 type="checkbox"
+                 required>
           <label for="consent">
             I agree to the campaign terms and consent
-            to the use of my submitted details for
-            campaign administration and voucher records.
+            to the use of my details for participation
+            and voucher records.
           </label>
         </div>
 
         <button id="submitButton"
                 type="submit"
                 class="submit-btn">
-          <span id="submitText">✨ Unlock My Scratch Card</span>
+          <span id="submitText">
+            ✨ Unlock My Scratch Card
+          </span>
           <span id="loader" class="loader" hidden></span>
         </button>
+
       </form>
     </div>
 
     <div id="scratchView" class="scratch-view" hidden>
       <h2 class="heading">🎁 Your Lucky Scratch Card</h2>
+
       <p class="subtitle">
         Scratch the silver area with your finger
         or mouse to reveal your surprise.
@@ -855,17 +975,17 @@ main {
           <div id="prizeHeading" class="prize-heading">
             Congratulations!
           </div>
+
           <div id="prizeAmount" class="prize-amount"></div>
           <div id="prizeCode" class="prize-code"></div>
         </div>
+
         <canvas id="scratchCanvas"
-                width="600"
-                height="300"
+                width="600" height="300"
                 aria-label="Scratch card"></canvas>
       </div>
     </div>
 
-    <!-- Only real errors appear here. -->
     <div id="errorBox" class="error-box"
          role="alert" hidden>
       <span id="errorText"></span>
@@ -879,21 +999,18 @@ main {
 
     <div id="srStatus" class="sr-only"
          aria-live="polite"></div>
+
   </section>
 </main>
 
 <footer class="footer">
-  🪔 Happy Diwali! 🪔<br>
-  One entered mobile number can participate once.<br>
-  Rewards depend on dealer budgets. Terms apply.
+  🪔 Happy Diwali! 🪔
 </footer>
 
 <script>
 "use strict";
 
-/* =============================================
-   GOOGLE APPS SCRIPT — ALREADY ADDED
-============================================= */
+/* GOOGLE APPS SCRIPT — ALREADY CONNECTED */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzYwMsUsHImx0rOSaWLW6UbCh1Bi2YA4WBrzIuFOSMBBV3kvWzdybgGPSDFvmVakM5x/exec";
@@ -903,8 +1020,8 @@ const $ = id => document.getElementById(id);
 const sleep = ms =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
+const reducedMotion = matchMedia(
+  "(prefers-reduced-motion:reduce)"
 ).matches;
 
 let dealers = [];
@@ -913,230 +1030,216 @@ let sending = false;
 let session = null;
 let currentReward = null;
 let syncingReveal = false;
-let hasRevealed = false;
 let resetTimer = null;
+let revealed = false;
 
-/* =============================================
-   ERRORS ONLY — NO SUCCESS BOXES
-============================================= */
+/* ERROR HANDLING */
 
-function showError(text, allowRetry = false) {
+function showError(text, allowRetry = false){
   $("errorText").textContent = text;
   $("errorBox").hidden = false;
   $("retryButton").hidden = !allowRetry;
 }
 
-function clearError() {
-  $("errorText").textContent = "";
+function clearError(){
   $("errorBox").hidden = true;
+  $("errorText").textContent = "";
   $("retryButton").hidden = true;
 }
 
-function busy(state) {
+function busy(state){
   sending = state;
   $("submitButton").disabled = state;
   $("loader").hidden = !state;
+
   $("submitText").textContent = state
     ? "Preparing Your Lucky Gift..."
     : "✨ Unlock My Scratch Card";
 }
 
-function announce(text) {
+function announce(text){
   $("srStatus").textContent = text;
 }
 
-/* =============================================
-   FESTIVE INPUT SPARKLES
-============================================= */
+/* FIELD SPARKLE ANIMATION */
 
-function sparkleNear(el, count = 5) {
-  if (reducedMotion) return;
+function sparkle(el, count = 6){
+  if(reducedMotion) return;
 
-  const rect = el.getBoundingClientRect();
+  const r = el.getBoundingClientRect();
 
-  for (let i = 0; i < count; i++) {
-    const spark = document.createElement("span");
-    spark.className = "field-spark";
+  for(let i=0;i<count;i++){
+    const s = document.createElement("span");
+    s.className = "input-spark";
 
-    spark.style.left =
-      rect.left + Math.random() * rect.width + "px";
-    spark.style.top =
-      rect.top + Math.random() * rect.height + "px";
+    s.style.left =
+      r.left + Math.random()*r.width + "px";
+    s.style.top =
+      r.top + Math.random()*r.height + "px";
 
-    spark.style.setProperty(
-      "--sx", (Math.random() - .5) * 90 + "px"
+    s.style.setProperty(
+      "--dx",(Math.random()-.5)*110+"px"
     );
-    spark.style.setProperty(
-      "--sy", (-25 - Math.random() * 60) + "px"
+    s.style.setProperty(
+      "--dy",(-25-Math.random()*70)+"px"
     );
 
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 750);
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),800);
   }
 }
 
-document.querySelectorAll(".field input").forEach(el => {
-  el.addEventListener("focus", () => {
+document.querySelectorAll(".field input").forEach(el=>{
+  el.addEventListener("focus",()=>{
     clearError();
-    sparkleNear(el);
+    sparkle(el);
   });
 });
 
-$("mobile").addEventListener("input", e => {
-  e.target.value = e.target.value
-    .replace(/\D/g, "")
-    .slice(0, 10);
+$("mobile").addEventListener("input",e=>{
+  e.target.value =
+    e.target.value.replace(/\D/g,"").slice(0,10);
 });
 
-/* =============================================
-   GOOGLE APPS SCRIPT JSONP READ
-============================================= */
+/* APPS SCRIPT JSONP */
 
-function apiGet(action, extra = {}) {
-  return new Promise((resolve, reject) => {
-    const callback = "cb_" +
-      crypto.randomUUID().replace(/-/g, "");
+function apiGet(action,extra={}){
+  return new Promise((resolve,reject)=>{
+    const callback =
+      "cb_"+crypto.randomUUID().replace(/-/g,"");
 
     const script = document.createElement("script");
-
     let timeout;
 
-    function cleanup() {
+    function cleanup(){
       clearTimeout(timeout);
       delete window[callback];
       script.remove();
     }
 
-    window[callback] = data => {
+    window[callback]=data=>{
       cleanup();
       resolve(data);
     };
 
-    script.onerror = () => {
+    script.onerror=()=>{
       cleanup();
-      reject(new Error("Unable to reach Google Sheets."));
+      reject(new Error("Unable to connect to server."));
     };
 
-    timeout = setTimeout(() => {
+    timeout=setTimeout(()=>{
       cleanup();
-      reject(new Error("The server request timed out."));
-    }, 15000);
+      reject(new Error("Server request timed out."));
+    },15000);
 
-    const url = new URL(API_URL);
-    url.searchParams.set("action", action);
-    url.searchParams.set("callback", callback);
-    url.searchParams.set("nonce", crypto.randomUUID());
+    const url=new URL(API_URL);
+    url.searchParams.set("action",action);
+    url.searchParams.set("callback",callback);
+    url.searchParams.set("nonce",crypto.randomUUID());
 
-    Object.entries(extra).forEach(([key, value]) => {
-      url.searchParams.set(key, value);
+    Object.entries(extra).forEach(([k,v])=>{
+      url.searchParams.set(k,v);
     });
 
-    script.src = url.toString();
+    script.src=url.toString();
     document.head.appendChild(script);
   });
 }
 
-/* =============================================
-   POST WRITE — STATUS CONFIRMED SEPARATELY
-============================================= */
+/* CROSS-DOMAIN POST */
 
-function apiPost(data) {
-  return fetch(API_URL, {
-    method: "POST",
-    mode: "no-cors",
-    body: new URLSearchParams(data)
+function apiPost(data){
+  return fetch(API_URL,{
+    method:"POST",
+    mode:"no-cors",
+    body:new URLSearchParams(data)
   });
 }
 
-async function pollStatus(s, requireScratched = false) {
-  for (let i = 0; i < 25; i++) {
+async function pollStatus(s,needScratched=false){
+  for(let i=0;i<25;i++){
     await sleep(1200);
 
-    try {
-      const result = await apiGet("status", {
-        requestId: s.requestId,
-        receipt: s.receipt
+    try{
+      const result=await apiGet("status",{
+        requestId:s.requestId,
+        receipt:s.receipt
       });
 
-      if (result.ok) {
-        if (!requireScratched || result.scratched) {
+      if(result.ok){
+        if(!needScratched||result.scratched){
           return result;
         }
         continue;
       }
 
-      if (result.code === "PENDING" ||
-          result.code === "SERVER_ERROR") {
+      if(result.code==="PENDING"||
+         result.code==="SERVER_ERROR"){
         continue;
       }
 
       return result;
-
-    } catch (err) {
-      // Temporary errors: keep trying.
+    }catch(err){
+      // Temporary network failure.
     }
   }
-
   return null;
 }
 
-/* =============================================
-   DEALER SEARCHABLE DROPDOWN
-============================================= */
+/* SEARCHABLE DEALER DROPDOWN */
 
-function selectedDealer() {
-  const value = $("dealerInput").value
-    .trim().toLowerCase();
+function selectedDealer(){
+  const text=$("dealerInput").value.trim().toLowerCase();
 
-  return dealers.find(d =>
-    d.toLowerCase() === value
-  ) || "";
+  return dealers.find(d=>
+    d.toLowerCase()===text
+  )||"";
 }
 
-function updateDealerProof() {
-  const valid = Boolean(selectedDealer());
-  $("proofField").hidden = !valid;
-  $("dealerProof").required = valid;
+function updateProof(){
+  const valid=Boolean(selectedDealer());
+  $("proofField").hidden=!valid;
+  $("dealerProof").required=valid;
 }
 
-function closeDealerList() {
-  $("dealerList").hidden = true;
+function closeDealers(){
+  $("dealerList").hidden=true;
   $("dealerInput").setAttribute(
-    "aria-expanded", "false"
+    "aria-expanded","false"
   );
 }
 
-function renderDealerList() {
-  const list = $("dealerList");
+function renderDealers(){
+  const list=$("dealerList");
   list.replaceChildren();
 
-  const query = $("dealerInput").value
+  const search=$("dealerInput").value
     .trim().toLowerCase();
 
-  const matches = dealers.filter(name =>
-    name.toLowerCase().includes(query)
+  const matches=dealers.filter(d=>
+    d.toLowerCase().includes(search)
   );
 
-  if (!matches.length) {
-    const empty = document.createElement("div");
-    empty.className = "no-option";
-    empty.textContent = "No matching dealer found.";
-    list.appendChild(empty);
+  if(!matches.length){
+    const div=document.createElement("div");
+    div.className="no-option";
+    div.textContent="No matching dealer found.";
+    list.appendChild(div);
     return;
   }
 
-  matches.slice(0, 100).forEach(name => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "option";
-    btn.setAttribute("role", "option");
-    btn.textContent = "🏪  " + name;
+  matches.slice(0,100).forEach(name=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="option";
+    btn.textContent="🏪 "+name;
+    btn.setAttribute("role","option");
 
-    btn.onclick = () => {
-      $("dealerInput").value = name;
-      closeDealerList();
-      updateDealerProof();
-      sparkleNear($("dealerInput"), 10);
+    btn.onclick=()=>{
+      $("dealerInput").value=name;
+      closeDealers();
+      updateProof();
+      sparkle($("dealerInput"),10);
       $("dealerProof").focus();
     };
 
@@ -1144,243 +1247,230 @@ function renderDealerList() {
   });
 }
 
-function openDealerList() {
-  $("dealerList").hidden = false;
+function openDealers(){
+  $("dealerList").hidden=false;
   $("dealerInput").setAttribute(
-    "aria-expanded", "true"
+    "aria-expanded","true"
   );
-  renderDealerList();
+  renderDealers();
 }
 
-async function loadDealers() {
-  if (loading) return;
+async function loadDealers(){
+  if(loading)return;
+  loading=true;
 
-  loading = true;
+  try{
+    const result=await apiGet("dealers");
 
-  try {
-    const result = await apiGet("dealers");
-
-    if (!result.ok || !Array.isArray(result.dealers)) {
-      throw new Error("Dealer list could not be loaded.");
+    if(!result.ok||!Array.isArray(result.dealers)){
+      throw new Error("Dealer list unavailable.");
     }
 
-    dealers = result.dealers;
-    updateDealerProof();
+    dealers=result.dealers;
+    updateProof();
 
-    if (!$("dealerList").hidden) {
-      renderDealerList();
+    if(!$("dealerList").hidden){
+      renderDealers();
     }
-
-  } catch (err) {
+  }catch(err){
     showError(
       "Unable to load dealers. Please try again."
     );
-  } finally {
-    loading = false;
+  }finally{
+    loading=false;
   }
 }
 
-$("dealerInput").addEventListener("focus", () => {
-  openDealerList();
+$("dealerInput").addEventListener("focus",()=>{
+  openDealers();
   loadDealers();
 });
 
-$("dealerInput").addEventListener("input", () => {
-  updateDealerProof();
-  openDealerList();
+$("dealerInput").addEventListener("input",()=>{
+  updateProof();
+  openDealers();
 });
 
-$("dealerToggle").onclick = () => {
-  if ($("dealerList").hidden) {
-    openDealerList();
+$("dealerToggle").onclick=()=>{
+  if($("dealerList").hidden){
+    openDealers();
     loadDealers();
     $("dealerInput").focus();
-  } else {
-    closeDealerList();
+  }else{
+    closeDealers();
   }
 };
 
-$("dealerInput").addEventListener("keydown", e => {
-  if (e.key === "Escape") closeDealerList();
+$("dealerInput").addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeDealers();
 
-  if (e.key === "ArrowDown") {
+  if(e.key==="ArrowDown"){
     e.preventDefault();
-    openDealerList();
+    openDealers();
     $("dealerList").querySelector(".option")?.focus();
   }
 });
 
-document.addEventListener("pointerdown", e => {
-  if (!$("dealerCombo").contains(e.target)) {
-    closeDealerList();
+document.addEventListener("pointerdown",e=>{
+  if(!$("dealerCombo").contains(e.target)){
+    closeDealers();
   }
 });
 
-$("showProof").addEventListener("change", () => {
-  $("dealerProof").type = $("showProof").checked
-    ? "text"
-    : "password";
+$("showProof").addEventListener("change",()=>{
+  $("dealerProof").type=$("showProof").checked
+    ?"text":"password";
 });
 
-/* =============================================
-   REQUEST SESSION
-============================================= */
+/* SESSION */
 
-function saveSession(s) {
-  session = s;
-  sessionStorage.setItem(STORE, JSON.stringify(s));
+function saveSession(s){
+  session=s;
+  sessionStorage.setItem(STORE,JSON.stringify(s));
 }
 
-function readSession() {
-  try {
+function readSession(){
+  try{
     return JSON.parse(sessionStorage.getItem(STORE));
-  } catch (_) {
+  }catch(err){
     return null;
   }
 }
 
-function removeSession() {
-  session = null;
+function removeSession(){
+  session=null;
   sessionStorage.removeItem(STORE);
 }
 
-/* =============================================
-   FORM SUBMISSION
-============================================= */
+/* CUSTOMER FORM */
 
 $("customerForm").addEventListener(
-  "submit", async event => {
+  "submit",async event=>{
     event.preventDefault();
 
-    if (sending) return;
-    if (!$("customerForm").reportValidity()) return;
+    if(sending)return;
+    if(!$("customerForm").reportValidity())return;
 
-    const dealer = selectedDealer();
-    const mobile = $("mobile").value.trim();
-    const proof = $("dealerProof").value.trim();
+    const dealer=selectedDealer();
+    const mobile=$("mobile").value.trim();
+    const proof=$("dealerProof").value.trim();
 
-    if (!dealer) {
+    if(!dealer){
       showError(
         "Please select a valid dealer from the list."
       );
       return;
     }
 
-    if (!/^[6-9]\d{9}$/.test(mobile)) {
+    if(!/^[6-9]\d{9}$/.test(mobile)){
       showError(
         "Please enter a valid 10-digit mobile number."
       );
       return;
     }
 
-    if (!proof) {
+    if(!proof){
       showError(
-        "Please enter the dealer mobile number or code."
+        "Please enter your dealer mobile number or code."
       );
       return;
     }
 
     clearError();
     busy(true);
-    sparkleNear($("submitButton"), 18);
+    sparkle($("submitButton"),18);
 
-    const customer = {
-      customerName: $("customerName").value.trim(),
+    const customer={
+      customerName:$("customerName").value.trim(),
       mobile,
-      city: $("city").value.trim(),
-      dealerName: dealer
+      city:$("city").value.trim(),
+      dealerName:dealer
     };
 
-    const previous = readSession();
+    const previous=readSession();
 
-    const same = previous &&
-      previous.customerName === customer.customerName &&
-      previous.mobile === customer.mobile &&
-      previous.city === customer.city &&
-      previous.dealerName === customer.dealerName;
+    const same=previous&&
+      previous.customerName===customer.customerName&&
+      previous.mobile===customer.mobile&&
+      previous.city===customer.city&&
+      previous.dealerName===customer.dealerName;
 
-    const s = same ? previous : {
-      requestId: crypto.randomUUID(),
-      receipt: crypto.randomUUID(),
+    const s=same?previous:{
+      requestId:crypto.randomUUID(),
+      receipt:crypto.randomUUID(),
       ...customer
     };
 
     saveSession(s);
 
-    try {
-      // Dealer secret is not stored in sessionStorage.
+    try{
       apiPost({
-        action: "claim",
-        requestId: s.requestId,
-        receipt: s.receipt,
+        action:"claim",
+        requestId:s.requestId,
+        receipt:s.receipt,
         ...customer,
-        dealerProof: proof,
-        consent: $("consent").checked ? "yes" : "no"
-      }).catch(() => {});
+        dealerProof:proof,
+        consent:$("consent").checked?"yes":"no"
+      }).catch(()=>{});
 
-      const result = await pollStatus(s);
+      const result=await pollStatus(s);
 
-      if (!result) {
+      if(!result){
         throw new Error(
-          "The server has not confirmed your request. " +
+          "Server confirmation is pending. " +
           "Please retry with the same details."
         );
       }
 
-      if (!result.ok) {
+      if(!result.ok){
         removeSession();
         throw new Error(
-          result.message || "Registration failed."
+          result.message||"Registration failed."
         );
       }
 
-      currentReward = result;
+      currentReward=result;
       displayScratch(result);
 
-      // Small opening rocket celebration.
-      launchFireworks(false);
+      // Fireworks begin as soon as card opens.
+      launchFireworks(4200,true);
+      burstConfetti(45);
+
       announce("Your lucky scratch card is ready.");
 
-    } catch (err) {
+    }catch(err){
       showError(err.message);
-
-    } finally {
+    }finally{
       busy(false);
     }
   }
 );
 
-/* =============================================
-   SCRATCH CARD DISPLAY
-============================================= */
+/* SCRATCH CARD */
 
-function displayScratch(result) {
-  currentReward = result;
-  hasRevealed = false;
-  syncingReveal = false;
+function displayScratch(result){
+  currentReward=result;
 
-  $("formView").hidden = true;
-  $("scratchView").hidden = false;
+  $("formView").hidden=true;
+  $("scratchView").hidden=false;
   $("scratchCard").classList.remove("revealed");
   clearError();
 
-  const amount = Number(result.amount || 0);
+  const amount=Number(result.amount||0);
 
-  $("prizeHeading").textContent =
-    amount > 0
-      ? "🎉 Congratulations!"
-      : "Better Luck Next Time";
+  $("prizeHeading").textContent=
+    amount>0?"🎉 Congratulations!":"Better Luck Next Time";
 
-  $("prizeAmount").textContent =
-    amount > 0 ? "₹" + amount : "No Reward";
+  $("prizeAmount").textContent=
+    amount>0?"₹"+amount:"No Reward";
 
-  $("prizeCode").textContent =
-    amount > 0
-      ? "Voucher: " + result.voucher
-      : "No voucher for this entry";
+  $("prizeCode").textContent=
+    amount>0
+      ?"Voucher: "+result.voucher
+      :"No voucher for this entry";
 
-  if (result.scratched) {
-    finishVisualReveal();
+  if(result.scratched){
+    finishReveal();
     setResetTimer(10000);
     return;
   }
@@ -1388,543 +1478,465 @@ function displayScratch(result) {
   initializeScratch();
 }
 
-function finishVisualReveal() {
-  $("scratchCanvas").style.display = "none";
+function finishReveal(){
+  $("scratchCanvas").style.display="none";
   $("scratchCard").classList.add("revealed");
 }
 
-/* =============================================
-   SAVE SCRATCH IN GOOGLE SHEET
-============================================= */
+/* SAVE SCRATCH AND RESET */
 
-async function saveScratch() {
-  if (syncingReveal || !session) return;
+async function saveScratch(){
+  if(syncingReveal||!session)return;
 
-  syncingReveal = true;
-  hasRevealed = true;
+  syncingReveal=true;
   clearError();
 
-  const scratchedAt = Date.now();
+  const started=Date.now();
 
-  finishVisualReveal();
+  finishReveal();
 
-  // Grand Diwali rockets, fireworks and golden confetti.
-  launchFireworks(true);
-  burstConfetti(110);
+  launchFireworks(7200,true);
+  burstConfetti(130);
 
-  try {
-    await syncScratchStatus();
+  try{
+    await syncScratch();
 
-    announce("Your scratch result has been saved.");
+    const remaining=Math.max(
+      0,10000-(Date.now()-started)
+    );
 
-    // Reset 10 seconds after the visual scratch,
-    // provided Google Sheets has confirmed saving.
-    const elapsed = Date.now() - scratchedAt;
-    setResetTimer(Math.max(0, 10000 - elapsed));
+    setResetTimer(remaining);
 
-  } catch (err) {
+  }catch(err){
     showError(
-      "Your reward is assigned, but scratch saving " +
-      "could not be confirmed. Please retry.",
+      "Unable to confirm scratch saving. Please retry.",
       true
     );
-  } finally {
-    syncingReveal = false;
+  }finally{
+    syncingReveal=false;
   }
 }
 
-async function syncScratchStatus() {
-  if (!session) {
-    throw new Error("Session not available.");
+async function syncScratch(){
+  if(!session){
+    throw new Error("Session unavailable.");
   }
 
   apiPost({
-    action: "reveal",
-    requestId: session.requestId,
-    receipt: session.receipt
-  }).catch(() => {});
+    action:"reveal",
+    requestId:session.requestId,
+    receipt:session.receipt
+  }).catch(()=>{});
 
-  const result = await pollStatus(session, true);
+  const result=await pollStatus(session,true);
 
-  if (!result || !result.ok || !result.scratched) {
+  if(!result||!result.ok||!result.scratched){
     throw new Error("Scratch synchronization failed.");
   }
 
-  currentReward = result;
+  currentReward=result;
 }
 
-$("retryButton").addEventListener("click", async () => {
-  if (syncingReveal || !hasRevealed) return;
+$("retryButton").addEventListener("click",async()=>{
+  if(syncingReveal||!session)return;
 
-  syncingReveal = true;
-  $("retryButton").disabled = true;
+  syncingReveal=true;
+  $("retryButton").disabled=true;
 
-  try {
-    await syncScratchStatus();
+  try{
+    await syncScratch();
     clearError();
     setResetTimer(10000);
-  } catch (err) {
+  }catch(err){
     showError(
-      "Unable to confirm the scratch result. " +
-      "Please retry.",
+      "Unable to confirm scratch result. Please retry.",
       true
     );
-  } finally {
-    syncingReveal = false;
-    $("retryButton").disabled = false;
+  }finally{
+    syncingReveal=false;
+    $("retryButton").disabled=false;
   }
 });
 
-/* =============================================
-   REAL SCRATCH-CARD ANIMATION
-============================================= */
+/* SCRATCH EFFECT */
 
-function initializeScratch() {
-  const canvas = $("scratchCanvas");
-  const ctx = canvas.getContext("2d", {
-    willReadFrequently: true
+function initializeScratch(){
+  const canvas=$("scratchCanvas");
+  const ctx=canvas.getContext("2d",{
+    willReadFrequently:true
   });
 
-  canvas.style.display = "block";
+  canvas.style.display="block";
+  ctx.globalCompositeOperation="source-over";
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  ctx.globalCompositeOperation = "source-over";
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const silver = ctx.createLinearGradient(
-    0, 0, canvas.width, canvas.height
+  const silver=ctx.createLinearGradient(
+    0,0,canvas.width,canvas.height
   );
+  silver.addColorStop(0,"#8591a3");
+  silver.addColorStop(.4,"#e0e7ef");
+  silver.addColorStop(.65,"#f2f5fa");
+  silver.addColorStop(1,"#929baa");
 
-  silver.addColorStop(0, "#7d879a");
-  silver.addColorStop(.3, "#d8e0ec");
-  silver.addColorStop(.55, "#f1f4f9");
-  silver.addColorStop(1, "#8994a7");
+  ctx.fillStyle=silver;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  ctx.fillStyle = silver;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle="#354154";
+  ctx.textAlign="center";
+  ctx.font="bold 38px Arial";
+  ctx.fillText("SCRATCH HERE",300,150);
 
-  ctx.fillStyle = "#343e51";
-  ctx.textAlign = "center";
-  ctx.font = "bold 38px Arial";
+  let drawing=false;
+  let done=false;
 
-  ctx.fillText(
-    "SCRATCH HERE",
-    canvas.width / 2,
-    canvas.height / 2
-  );
-
-  let drawing = false;
-  let done = false;
-
-  function point(event) {
-    const rect = canvas.getBoundingClientRect();
-
-    return {
-      x: (event.clientX - rect.left) *
-        canvas.width / rect.width,
-      y: (event.clientY - rect.top) *
-        canvas.height / rect.height
+  function point(e){
+    const r=canvas.getBoundingClientRect();
+    return{
+      x:(e.clientX-r.left)*canvas.width/r.width,
+      y:(e.clientY-r.top)*canvas.height/r.height
     };
   }
 
-  canvas.onpointerdown = e => {
-    if (done) return;
+  canvas.onpointerdown=e=>{
+    if(done)return;
 
     e.preventDefault();
-    drawing = true;
+    drawing=true;
     canvas.setPointerCapture(e.pointerId);
 
-    const p = point(e);
-
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineWidth = 65;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
+    const p=point(e);
+    ctx.globalCompositeOperation="destination-out";
+    ctx.lineWidth=65;
+    ctx.lineCap="round";
+    ctx.lineJoin="round";
     ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-    ctx.lineTo(p.x + .1, p.y);
+    ctx.moveTo(p.x,p.y);
+    ctx.lineTo(p.x+.1,p.y);
     ctx.stroke();
   };
 
-  canvas.onpointermove = e => {
-    if (!drawing || done) return;
+  canvas.onpointermove=e=>{
+    if(!drawing||done)return;
 
     e.preventDefault();
-
-    const p = point(e);
-    ctx.lineTo(p.x, p.y);
+    const p=point(e);
+    ctx.lineTo(p.x,p.y);
     ctx.stroke();
   };
 
-  function endScratch() {
-    if (!drawing || done) return;
+  function end(){
+    if(!drawing||done)return;
 
-    drawing = false;
+    drawing=false;
     ctx.closePath();
 
-    const pixels = ctx.getImageData(
-      0, 0, canvas.width, canvas.height
+    const pixels=ctx.getImageData(
+      0,0,canvas.width,canvas.height
     ).data;
 
-    let erased = 0;
-    let total = 0;
+    let erased=0,total=0;
 
-    for (let i = 3; i < pixels.length; i += 64) {
+    for(let i=3;i<pixels.length;i+=64){
       total++;
-      if (pixels[i] < 80) erased++;
+      if(pixels[i]<80)erased++;
     }
 
-    if (total && erased / total >= .34) {
-      done = true;
+    if(total&&erased/total>=.34){
+      done=true;
       saveScratch();
     }
   }
 
-  canvas.onpointerup = endScratch;
-  canvas.onpointercancel = endScratch;
+  canvas.onpointerup=end;
+  canvas.onpointercancel=end;
 }
 
-/* =============================================
-   AUTO-RESET AFTER 10 SECONDS
-============================================= */
+/* AUTO RESET AFTER 10 SECONDS */
 
-function setResetTimer(delay) {
+function setResetTimer(delay){
   clearTimeout(resetTimer);
-  resetTimer = setTimeout(resetHome, delay);
+  resetTimer=setTimeout(resetHome,delay);
 }
 
-function resetHome() {
+function resetHome(){
   clearTimeout(resetTimer);
-  resetTimer = null;
+  resetTimer=null;
 
   removeSession();
-  currentReward = null;
-  hasRevealed = false;
-  syncingReveal = false;
+  currentReward=null;
+  syncingReveal=false;
 
   $("customerForm").reset();
-  $("dealerInput").value = "";
-  $("dealerProof").value = "";
-  $("dealerProof").type = "password";
+  $("dealerInput").value="";
+  $("dealerProof").value="";
+  $("dealerProof").type="password";
 
-  $("formView").hidden = false;
-  $("scratchView").hidden = true;
+  $("formView").hidden=false;
+  $("scratchView").hidden=true;
+
   $("scratchCard").classList.remove("revealed");
 
-  closeDealerList();
-  updateDealerProof();
+  closeDealers();
+  updateProof();
   clearError();
   busy(false);
 
-  announce("Registration form is ready.");
-
   window.scrollTo({
-    top: 0,
-    behavior: reducedMotion ? "instant" : "smooth"
+    top:0,
+    behavior:reducedMotion?"instant":"smooth"
   });
 
   loadDealers();
 }
 
-/* =============================================
-   FULL-SCREEN ANIMATED DIWALI FIREWORKS
-============================================= */
+/* FULL-SCREEN DIWALI ROCKETS */
 
-const fxCanvas = $("celebrationCanvas");
-const fx = fxCanvas.getContext("2d");
+const fireCanvas=$("fireworksCanvas");
+const fx=fireCanvas.getContext("2d");
 
-let fxWidth = 0;
-let fxHeight = 0;
-let rockets = [];
-let sparks = [];
-let animationRunning = false;
-let animationEnd = 0;
-let lastLaunch = 0;
-let launchGap = 280;
+let width=0,height=0;
+let rockets=[];
+let particles=[];
+let animating=false;
+let fireworksUntil=0;
+let lastRocket=0;
+let rocketGap=240;
 
-const fireColors = [
-  "#ffd36e",
-  "#ff7d96",
-  "#ffe8bc",
-  "#bf8cff",
-  "#79edcf",
-  "#ff9e48"
+const colors=[
+  "#ffd36e","#ff72af","#f5d3ff",
+  "#77e7d4","#ffffff","#ffa348"
 ];
 
-function fitFireworks() {
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+function resizeFireworks(){
+  const ratio=Math.min(devicePixelRatio||1,2);
 
-  fxWidth = window.innerWidth;
-  fxHeight = window.innerHeight;
+  width=innerWidth;
+  height=innerHeight;
 
-  fxCanvas.width = Math.round(fxWidth * ratio);
-  fxCanvas.height = Math.round(fxHeight * ratio);
+  fireCanvas.width=Math.round(width*ratio);
+  fireCanvas.height=Math.round(height*ratio);
 
-  fx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  fx.setTransform(ratio,0,0,ratio,0,0);
 }
 
-window.addEventListener("resize", fitFireworks);
-fitFireworks();
+addEventListener("resize",resizeFireworks);
+resizeFireworks();
 
-function makeRocket() {
-  const x = fxWidth * (.1 + Math.random() * .8);
-  const targetY = fxHeight * (.12 + Math.random() * .4);
+function newRocket(){
+  const x=width*(.12+Math.random()*.76);
 
   rockets.push({
     x,
-    y: fxHeight + 15,
-    targetY,
-    vx: (Math.random() - .5) * 1.8,
-    vy: -7 - Math.random() * 3,
-    color: fireColors[
-      Math.floor(Math.random() * fireColors.length)
-    ]
+    y:height+20,
+    targetY:height*(.1+Math.random()*.45),
+    vx:(Math.random()-.5)*1.7,
+    vy:-7-Math.random()*3,
+    color:colors[Math.floor(Math.random()*colors.length)]
   });
 }
 
-function explode(x, y, color) {
-  const amount = 48;
+function explode(x,y,color){
+  for(let i=0;i<65;i++){
+    const angle=(Math.PI*2*i)/65;
+    const speed=1.5+Math.random()*4.3;
 
-  for (let i = 0; i < amount; i++) {
-    const angle = Math.PI * 2 * i / amount;
-    const velocity = 1.6 + Math.random() * 3.6;
-
-    sparks.push({
-      x, y,
-      vx: Math.cos(angle) * velocity,
-      vy: Math.sin(angle) * velocity,
-      alpha: 1,
+    particles.push({
+      x,y,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      opacity:1,
       color,
-      radius: 1.5 + Math.random() * 1.7,
-      gravity: .035
+      radius:1.5+Math.random()*1.6
     });
   }
 
-  // Bright secondary golden flash
-  for (let i = 0; i < 14; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const v = Math.random() * 2.3;
-
-    sparks.push({
-      x, y,
-      vx: Math.cos(angle) * v,
-      vy: Math.sin(angle) * v,
-      alpha: 1,
-      color: "#fff4ca",
-      radius: 2,
-      gravity: .02
-    });
-  }
-
-  // Keep particle counts manageable on phones.
-  if (sparks.length > 950) {
-    sparks.splice(0, sparks.length - 950);
+  if(particles.length>1200){
+    particles.splice(0,particles.length-1200);
   }
 }
 
-function animateFireworks(now) {
-  fx.clearRect(0, 0, fxWidth, fxHeight);
+function animateFireworks(now){
+  fx.clearRect(0,0,width,height);
 
-  if (now < animationEnd &&
-      now - lastLaunch >= launchGap) {
-    makeRocket();
-    lastLaunch = now;
+  if(now<fireworksUntil&&now-lastRocket>rocketGap){
+    newRocket();
+    lastRocket=now;
   }
 
-  rockets = rockets.filter(r => {
-    r.x += r.vx;
-    r.y += r.vy;
+  rockets=rockets.filter(r=>{
+    r.x+=r.vx;
+    r.y+=r.vy;
 
     fx.beginPath();
-    fx.moveTo(r.x, r.y + 23);
-    fx.lineTo(r.x, r.y);
-    fx.strokeStyle = r.color;
-    fx.lineWidth = 3;
-    fx.shadowBlur = 15;
-    fx.shadowColor = r.color;
+    fx.moveTo(r.x,r.y+26);
+    fx.lineTo(r.x,r.y);
+    fx.strokeStyle=r.color;
+    fx.lineWidth=3;
+    fx.shadowColor=r.color;
+    fx.shadowBlur=18;
     fx.stroke();
-    fx.shadowBlur = 0;
+    fx.shadowBlur=0;
 
-    if (r.y <= r.targetY) {
-      explode(r.x, r.y, r.color);
+    if(r.y<=r.targetY){
+      explode(r.x,r.y,r.color);
       return false;
     }
     return true;
   });
 
-  sparks = sparks.filter(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += p.gravity;
-    p.vx *= .988;
-    p.alpha -= .015;
+  particles=particles.filter(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.vy+=.035;
+    p.vx*=.988;
+    p.opacity-=.014;
 
-    if (p.alpha <= 0) return false;
+    if(p.opacity<=0)return false;
 
-    fx.globalAlpha = p.alpha;
+    fx.globalAlpha=p.opacity;
     fx.beginPath();
-    fx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    fx.fillStyle = p.color;
-    fx.shadowColor = p.color;
-    fx.shadowBlur = 10;
+    fx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+    fx.fillStyle=p.color;
+    fx.shadowColor=p.color;
+    fx.shadowBlur=9;
     fx.fill();
 
     return true;
   });
 
-  fx.globalAlpha = 1;
-  fx.shadowBlur = 0;
+  fx.globalAlpha=1;
+  fx.shadowBlur=0;
 
-  if (now < animationEnd ||
-      rockets.length ||
-      sparks.length) {
+  if(now<fireworksUntil||
+     rockets.length||
+     particles.length){
     requestAnimationFrame(animateFireworks);
-  } else {
-    animationRunning = false;
-    fx.clearRect(0, 0, fxWidth, fxHeight);
+  }else{
+    animating=false;
+    fx.clearRect(0,0,width,height);
   }
 }
 
-function launchFireworks(grand = false) {
-  if (reducedMotion) return;
+function launchFireworks(duration=5000,grand=false){
+  if(reducedMotion)return;
 
-  const now = performance.now();
-
-  animationEnd = Math.max(
-    animationEnd,
-    now + (grand ? 6800 : 2400)
+  const now=performance.now();
+  fireworksUntil=Math.max(
+    fireworksUntil,now+duration
   );
 
-  launchGap = grand ? 190 : 450;
+  rocketGap=grand?165:360;
 
-  // Instant launch when the card appears.
-  for (let i = 0; i < (grand ? 4 : 2); i++) {
-    makeRocket();
+  for(let i=0;i<(grand?5:2);i++){
+    newRocket();
   }
 
-  if (!animationRunning) {
-    animationRunning = true;
-    lastLaunch = now;
+  if(!animating){
+    animating=true;
+    lastRocket=now;
     requestAnimationFrame(animateFireworks);
   }
 }
 
-/* =============================================
-   GOLDEN CONFETTI AFTER SCRATCH
-============================================= */
+/* FESTIVE CONFETTI */
 
-function burstConfetti(count = 100) {
-  if (reducedMotion) return;
+function burstConfetti(count=100){
+  if(reducedMotion)return;
 
-  const colors = [
-    "#ffd678",
-    "#ff8caa",
-    "#d29aff",
-    "#ffffff",
-    "#7cecca"
+  const colors=[
+    "#ffd875","#ff89b0",
+    "#d7a0ff","#ffffff","#80ebcf"
   ];
 
-  for (let i = 0; i < count; i++) {
-    const el = document.createElement("span");
-    el.className = "confetti";
+  for(let i=0;i<count;i++){
+    const el=document.createElement("span");
+    el.className="confetti";
 
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.background = colors[
-      Math.floor(Math.random() * colors.length)
-    ];
+    el.style.left=Math.random()*100+"vw";
+    el.style.background=
+      colors[Math.floor(Math.random()*colors.length)];
 
     el.style.setProperty(
-      "--falltime",
-      (2.6 + Math.random() * 3) + "s"
+      "--time",(2.5+Math.random()*3)+"s"
     );
-
     el.style.setProperty(
-      "--drift",
-      (Math.random() - .5) * 300 + "px"
+      "--drift",(Math.random()-.5)*300+"px"
     );
-
     el.style.setProperty(
-      "--spin",
-      Math.random() * 1000 + "deg"
+      "--spin",Math.random()*1000+"deg"
     );
 
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 6500);
+    setTimeout(()=>el.remove(),6500);
   }
 }
 
-/* =============================================
-   FLOATING DIWALI LIGHTS
-============================================= */
+/* FLOATING SPARKLES */
 
-function createAmbientLights() {
-  if (reducedMotion) return;
+function createAmbientLights(){
+  if(reducedMotion)return;
 
-  const layer = $("ambient");
+  const layer=$("ambient");
 
-  for (let i = 0; i < 35; i++) {
-    const dot = document.createElement("span");
+  for(let i=0;i<40;i++){
+    const dot=document.createElement("span");
 
-    dot.style.left = Math.random() * 100 + "%";
-    dot.style.top = Math.random() * 100 + "%";
+    dot.style.left=Math.random()*100+"%";
+    dot.style.top=Math.random()*100+"%";
 
     dot.style.setProperty(
-      "--time",
-      (3 + Math.random() * 5) + "s"
+      "--duration",(3+Math.random()*5)+"s"
     );
-
     dot.style.setProperty(
-      "--delay",
-      Math.random() * 6 + "s"
+      "--delay",Math.random()*7+"s"
     );
 
     layer.appendChild(dot);
   }
 }
 
-/* =============================================
-   RESTORE PREVIOUS ASSIGNED CARD
-============================================= */
+/* RESTORE PREVIOUS SCRATCH CARD */
 
-async function restoreSession() {
-  const old = readSession();
-  if (!old || !old.requestId || !old.receipt) return;
+async function restoreSession(){
+  const old=readSession();
 
-  session = old;
+  if(!old||!old.requestId||!old.receipt)return;
 
-  $("customerName").value = old.customerName || "";
-  $("mobile").value = old.mobile || "";
-  $("city").value = old.city || "";
-  $("dealerInput").value = old.dealerName || "";
+  session=old;
 
-  updateDealerProof();
+  $("customerName").value=old.customerName||"";
+  $("mobile").value=old.mobile||"";
+  $("city").value=old.city||"";
+  $("dealerInput").value=old.dealerName||"";
 
-  try {
-    const result = await apiGet("status", {
-      requestId: old.requestId,
-      receipt: old.receipt
+  updateProof();
+
+  try{
+    const result=await apiGet("status",{
+      requestId:old.requestId,
+      receipt:old.receipt
     });
 
-    if (result.ok) {
+    if(result.ok){
       displayScratch(result);
-    } else if (result.code !== "PENDING") {
+    }else if(result.code!=="PENDING"){
       removeSession();
     }
-  } catch (_) {
-    // Customer can retry with their original form details.
+  }catch(err){
+    // Original form remains available for retry.
   }
 }
 
-/* =============================================
-   INITIALIZE WEBSITE
-============================================= */
+/* START */
 
-async function initialize() {
+async function initialize(){
   createAmbientLights();
   await loadDealers();
   await restoreSession();
 }
 
 initialize();
+
 </script>
 </body>
 </html>
